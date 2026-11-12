@@ -89,7 +89,7 @@ label{font-weight:600;font-size:15px}
         <small>תמונה או PDF, עד 8MB</small>
         <input id="proof" name="proof" type="file" accept="image/*,application/pdf" required>
       </label>
-      <label class="check" id="agreeBox"><input type="checkbox" id="agree"> <span id="agreeTxt">אני מאשר/ת את פרטי ההזמנה ואת תנאי התשלום: 50% מקדמה עכשיו, ו־50% לפני המשלוח.</span></label>
+      <label class="check" id="agreeBox"><input type="checkbox" id="agree"> <span id="agreeTxt">אני מאשר/ת את פרטי ההזמנה ואת התשלום המלא.</span></label>
       <p class="err" id="err" hidden></p>
       <button class="btn" id="go" type="submit">אישור ההזמנה</button>
     </form>
@@ -120,13 +120,13 @@ label{font-weight:600;font-size:15px}
   const bal=D.k==='bal';
   document.title='VENIA | '+(bal?'תשלום יתרה':'אישור הזמנה');
   $('#title').textContent=bal?'תשלום יתרה לפני משלוח':'אישור הזמנה';
-  $('#lead').textContent=bal?'המארזים מוכנים. אחרי תשלום היתרה הם יוצאים אליכם למשלוח.':'כדי לאשר את ההזמנה משלמים מקדמה של 50% ומצרפים את אישור התשלום.';
+  $('#lead').textContent=bal?'המארזים מוכנים. אחרי תשלום היתרה הם יוצאים אליכם למשלוח.':'כדי לאשר את ההזמנה משלמים את סכום ההזמנה ומצרפים את אישור התשלום. אחרי התשלום נפיק חשבונית ונתחיל בהכנת המארזים.';
   $('#who').innerHTML=`<dt>מספר הזמנה</dt><dd dir="ltr" style="text-align:right">${esc(D.i)}</dd>${D.b?`<dt>עסק</dt><dd>${esc(D.b)}</dd>`:''}${D.n?`<dt>שם</dt><dd>${esc(D.n)}</dd>`:''}`;
   $('#lines').innerHTML=(D.l||[]).map(x=>`<li><span>${esc(x[0])}${x[2]?`<small>${esc(x[2])}</small>`:''}</span><span>× ${esc(x[1])}</span></li>`).join('')+(D.d?`<li><span>הנחת כמות</span><span>−${nis(D.d)}</span></li>`:'');
   $('#tot').textContent=nis(D.t);
-  $('#dueLbl').textContent=bal?'יתרה לתשלום':'מקדמה לתשלום עכשיו';
+  $('#dueLbl').textContent=bal?'יתרה לתשלום':'סכום לתשלום';
   $('#due').textContent=nis(D.a);
-  $('#dueNote').textContent=bal?'50% השני מתוך '+nis(D.t):'50% מתוך '+nis(D.t)+'. היתרה תשולם לפני המשלוח.';
+  $('#dueNote').textContent=bal?'50% השני מתוך '+nis(D.t):'תשלום מלא להזמנה';
   if(bal){$('#agreeTxt').textContent='שילמתי את יתרת ההזמנה.';$('#go').textContent='שליחת אישור התשלום'}
   $('#page').hidden=false;
 
@@ -134,7 +134,7 @@ label{font-weight:600;font-size:15px}
     try{await navigator.clipboard.writeText(c.dataset.copy);c.textContent='הועתק'}catch(x){c.textContent=c.dataset.copy}
     setTimeout(()=>c.textContent='העתקה',1800)});
 
-  const summary=()=>[(bal?'תשלום יתרה':'אישור הזמנה ומקדמה')+` · הזמנה ${D.i}`,D.b?`עסק: ${D.b}`:'',D.n?`שם: ${D.n}`:'',...(D.l||[]).map(x=>`• ${x[0]} × ${x[1]}`),`סה״כ ההזמנה: ${nis(D.t)}`,`שולם עכשיו: ${nis(D.a)}`].filter(Boolean).join('\n');
+  const summary=()=>[(bal?'תשלום יתרה':'אישור הזמנה ותשלום')+` · הזמנה ${D.i}`,D.b?`עסק: ${D.b}`:'',D.n?`שם: ${D.n}`:'',...(D.l||[]).map(x=>`• ${x[0]} × ${x[1]}`),`סה״כ ההזמנה: ${nis(D.t)}`,`שולם עכשיו: ${nis(D.a)}`].filter(Boolean).join('\n');
   $('#f').addEventListener('submit',async e=>{e.preventDefault();const err=$('#err');err.hidden=true;
     const file=$('#proof').files[0];
     if(!file){err.textContent='צריך לצרף את אישור התשלום (צילום מסך או PDF).';err.hidden=false;return}
@@ -142,13 +142,13 @@ label{font-weight:600;font-size:15px}
     if(!$('#agree').checked){err.textContent=bal?'סמנו שהיתרה שולמה.':'צריך לסמן שאתם מאשרים את פרטי ההזמנה.';err.hidden=false;return}
     const btn=$('#go');btn.disabled=true;btn.textContent='שולח…';
     const fd=new FormData();
-    Object.entries({'form-name':'payment',subject:`${bal?'יתרה שולמה':'מקדמה התקבלה'}: ${D.b||D.n||''} · ${nis(D.a)} (הזמנה ${D.i})`,order_id:D.i,kind:bal?'יתרה 50%':'מקדמה 50%',business:D.b||'',full_name:D.n||'',amount:D.a,order_total:D.t,order_summary:summary()}).forEach(([k,v])=>fd.append(k,v));
+    Object.entries({'form-name':'payment',subject:`${bal?'יתרה שולמה':'תשלום התקבל'}: ${D.b||D.n||''} · ${nis(D.a)} (הזמנה ${D.i})`,order_id:D.i,kind:bal?'יתרה':'תשלום מלא',business:D.b||'',full_name:D.n||'',amount:D.a,order_total:D.t,order_summary:summary()}).forEach(([k,v])=>fd.append(k,v));
     fd.append('proof',file);
     try{const r=await fetch('/',{method:'POST',body:fd});if(!r.ok)throw 0}
     catch(x){btn.disabled=false;btn.textContent=bal?'שליחת אישור התשלום':'אישור ההזמנה';err.innerHTML='השליחה לא הצליחה בגלל תקלה בחיבור. נסו שוב, או שלחו את צילום המסך בוואטסאפ ל־<span dir="ltr">053-591-0605</span>.';err.hidden=false;return}
     $('#page').hidden=true;$('#done').hidden=false;window.scrollTo(0,0);
     $('#doneH').textContent=bal?'התשלום התקבל, תודה!':'ההזמנה אושרה, תודה!';
-    $('#doneTxt').textContent=bal?'נבדוק את התשלום והמארזים יצאו אליכם למשלוח. ניצור קשר לתיאום.':'קיבלנו את אישור התשלום. נתחיל להכין את המארזים וניצור איתכם קשר לפני המשלוח.';
+    $('#doneTxt').textContent=bal?'נבדוק את התשלום והמארזים יצאו אליכם למשלוח. ניצור קשר לתיאום.':'קיבלנו את אישור התשלום. נשלח לכם חשבונית, נתחיל להכין את המארזים וניצור איתכם קשר לפני המשלוח.';
     $('#doneWa').href='https://wa.me/972535910605?text='+encodeURIComponent(summary()+'\n(צילום המסך של התשלום מצורף בהודעה הבאה)');
   });
 })();
