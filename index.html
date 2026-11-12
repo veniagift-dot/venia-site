@@ -865,6 +865,7 @@ body:not([data-view="home"]) .lead-sec{display:none}
 .card-sec .greet-text input[type=file]{background:none;border:none;padding:0;color:#d6cdb8}
 .card-sec .greet{box-shadow:0 30px 60px rgba(0,0,0,.35)}
 @media (max-width:600px){.card-sec .greet-wrap{padding:34px 22px}}
+.vid-sec .vid-wrap{grid-template-columns:1fr!important;max-width:760px;margin-inline:auto}
 .fab{position:fixed;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;display:flex;flex-direction:column;gap:10px}
 .h-ico{width:52px;height:52px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;padding:0;text-decoration:none;cursor:pointer;box-shadow:0 8px 22px rgba(20,29,51,.28)}
 .h-ico svg{width:26px;height:26px}
@@ -1195,7 +1196,6 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
 
   <section class="vid-sec wrap" aria-labelledby="vidH">
     <div class="vid-wrap">
-      <div class="vid-frame"><video src="img/venia-video.mp4" muted autoplay loop playsinline controls preload="metadata" aria-label="סרטון VENIA"></video></div>
       <div class="vid-text">
         <h2 class="sec-h" id="vidH">תודה שמגיעה עד הבית</h2>
         <p>מתנה לעובד היא לא עוד הטבה. היא הרגע שבו הוא פותח את המארז מול המשפחה, ורואה שמעריכים אותו.</p>
