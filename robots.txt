@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://venia-gifts.netlify.app/sitemap.xml
