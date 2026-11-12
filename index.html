@@ -882,6 +882,22 @@ body:not([data-view="home"]) .lead-sec{display:none}
 #cfBack{align-self:center}
 @media (max-width:560px){.bld-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.bld-step{padding:14px}.bld-item .bi-img{aspect-ratio:4/3}.bld-item b{font-size:13px}.bld-item .stp button{width:30px}}
 .bld-disc-note{margin:0;font-size:12px;color:var(--muted)}
+.pop{position:fixed;inset:0;z-index:95;background:rgba(10,14,25,.55);display:grid;place-items:center;padding:16px;animation:popIn .4s ease}
+@keyframes popIn{from{opacity:0}to{opacity:1}}
+.pop-box{position:relative;background:var(--brand,#141d33);color:#fff;border-radius:22px;padding:30px 22px 22px;max-width:420px;width:100%;text-align:center;display:flex;flex-direction:column;gap:10px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.pop-box::before{content:"";position:absolute;inset:8px;border:1px solid rgba(201,169,106,.4);border-radius:16px;pointer-events:none}
+.pop-x{position:absolute;top:12px;left:12px;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:16px;cursor:pointer;z-index:1}
+.pop-eye{font-family:var(--latin);letter-spacing:.35em;color:#e6c98e;font-size:14px}
+.pop-box h2{margin:0;font-size:22px;color:#fff}
+.pop-box p{margin:0;color:#d6cdb8;font-size:15px}
+#popForm{display:flex;flex-direction:column;gap:8px;position:relative}
+#popForm input{font:inherit;font-size:16px;padding:11px 13px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;text-align:right}
+#popForm input::placeholder{color:#b9b3a6}
+#popForm input[aria-invalid="true"]{border-color:#e08a74}
+#popForm .add{background:linear-gradient(135deg,#d9bd84,#b08d4a);color:#141d33;border:none;font-weight:800}
+#popForm .err{color:#ffb4a2;font-size:14px}
+.pop-wa{color:#bfe8cf;font-weight:700;position:relative}
+.pop-done{color:#bfe8cf!important;font-weight:700}
 .fab{position:fixed;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;display:flex;flex-direction:column;gap:10px}
 .h-ico{width:52px;height:52px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;padding:0;text-decoration:none;cursor:pointer;box-shadow:0 8px 22px rgba(20,29,51,.28)}
 .h-ico svg{width:26px;height:26px}
@@ -1053,7 +1069,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
         </section>
 
         <section class="bld-step" aria-labelledby="bs3">
-          <div class="st-hd"><span class="bld-n">2</span><div><h2 id="bs3">מוסיפים מתנות</h2><p>כל מתנה בתוספת תשלום. כשהמתנות כבר לא נכנסות בשקית, המארז עובר אוטומטית לקופסה בינונית.</p></div></div>
+          <div class="st-hd"><span class="bld-n">2</span><div><h2 id="bs3">מוסיפים מתנות</h2><p>כל מתנה בתוספת תשלום. כשהמתנות כבר לא נכנסות בשקית, המארז עובר אוטומטית לקופסה: <b>קופסה בינונית בתוספת ₪52</b>, <b>קופסה גדולה בתוספת ₪90</b>.</p></div></div>
           <div class="bld-items" id="bldItems"></div>
           <p class="bld-disc-note">התמונות להמחשה בלבד.</p>
         </section>
@@ -1328,7 +1344,24 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
   </div>
 </aside>
 
-<form name="lead" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="bot-field"><input name="subject"><input name="full_name"><input name="phone"><input name="email"></form>
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="popH" hidden>
+  <div class="pop-box">
+    <button type="button" class="pop-x" id="popX" aria-label="סגירה">✕</button>
+    <span class="pop-eye">VENIA</span>
+    <h2 id="popH">מעוניינים בהזמנה בהתאמה אישית?</h2>
+    <p>השאירו פרטים ונחזור אליכם עם הצעה מותאמת, או שלחו לנו הודעה בוואטסאפ.</p>
+    <form id="popForm" novalidate>
+      <label class="sr" for="pName">שם</label><input id="pName" autocomplete="name" placeholder="שם">
+      <label class="sr" for="pPhone">טלפון</label><input id="pPhone" type="tel" autocomplete="tel" placeholder="טלפון">
+      <label class="sr" for="pMail">מייל</label><input id="pMail" type="email" autocomplete="email" placeholder="מייל (לא חובה)">
+      <p class="err" id="pErr" hidden></p>
+      <button type="submit" class="add">שליחת פרטים</button>
+    </form>
+    <a class="pop-wa" href="https://wa.me/972535910605?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%94%D7%A6%D7%A2%D7%94%20%D7%9C%D7%90%D7%A8%D7%99%D7%96%D7%95%D7%AA%20%D7%9E%D7%AA%D7%A0%D7%94%20%D7%A9%D7%9C%20VENIA%20%D7%91%D7%94%D7%AA%D7%90%D7%9E%D7%94%20%D7%90%D7%99%D7%A9%D7%99%D7%AA" target="_blank" rel="noopener">או שלחו הודעה בוואטסאפ</a>
+    <p class="pop-done" id="pDone" hidden>תודה! קיבלנו את הפרטים ונחזור אליכם בהקדם.</p>
+  </div>
+</div>
+<form name="lead" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="bot-field"><input name="subject"><input name="source"><input name="full_name"><input name="phone"><input name="email"></form>
 <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="bot-field"><input name="subject"><input name="full_name"><input name="phone"><input name="business"><textarea name="message"></textarea></form>
 <form name="order" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
   <input name="bot-field"><input name="subject"><input name="full_name"><input name="phone"><input name="email"><input name="business"><input name="delivery"><input name="order_total"><input name="packages"><input name="discount"><textarea name="notes"></textarea><input name="order_id"><textarea name="summary"></textarea><textarea name="greeting"></textarea>
@@ -1338,7 +1371,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
 
 
 <div class="fab" aria-label="קיצורים">
-  <a class="h-ico h-wa" href="https://wa.me/972535910605?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%99%D7%90%D7%95%D7%9D%20%D7%90%D7%99%D7%A9%D7%99%20%D7%9C%D7%92%D7%91%D7%99%20%D7%9E%D7%AA%D7%A0%D7%95%D7%AA%20VENIA" target="_blank" rel="noopener" aria-label="וואטסאפ"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.7 5.8 5.1 2.2.9 3 1 4.1.8.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg></a>
+  <a class="h-ico h-wa" href="https://wa.me/972535910605?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%94%D7%A6%D7%A2%D7%94%20%D7%9C%D7%90%D7%A8%D7%99%D7%96%D7%95%D7%AA%20%D7%9E%D7%AA%D7%A0%D7%94%20%D7%A9%D7%9C%20VENIA%20%D7%91%D7%94%D7%AA%D7%90%D7%9E%D7%94%20%D7%90%D7%99%D7%A9%D7%99%D7%AA" target="_blank" rel="noopener" aria-label="וואטסאפ"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.7 5.8 5.1 2.2.9 3 1 4.1.8.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg></a>
   <button type="button" class="h-ico h-a11y" id="a11yBtn" aria-controls="a11yPanel" aria-expanded="false" aria-label="תפריט נגישות"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4" r="2.2" fill="currentColor"/><path d="M4 8.2l8 1.4 8-1.4M12 9.6v4.6m0 0l-3.6 7.3M12 14.2l3.6 7.3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 </div>
 <div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="אפשרויות נגישות" hidden>
@@ -1865,6 +1898,26 @@ $("#leadForm").addEventListener("submit",async e=>{e.preventDefault();
   setTimeout(()=>document.querySelectorAll(".rv:not(.in)").forEach(el=>{if(el.closest(".steps"))return;const r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)el.classList.add("in")}),1500);
 })();
 
+// ---------- popup: personal order (once per visitor, after a few seconds on the home page)
+(function(){
+  const pop=$("#pop");if(!pop)return;
+  const seen=()=>{try{return localStorage.getItem("venia-pop")}catch(e){return null}};
+  const mark=v=>{try{localStorage.setItem("venia-pop",v)}catch(e){}};
+  const close=()=>{pop.hidden=true;mark("closed")};
+  setTimeout(()=>{if(seen()||document.body.dataset.view!=="home"||document.querySelector("aside.cart.open,#drawer.open"))return;pop.hidden=false;$("#pName").focus()},9000);
+  $("#popX").onclick=close;pop.addEventListener("click",e=>{if(e.target===pop)close()});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!pop.hidden)close()});
+  $("#popForm").addEventListener("submit",async e=>{e.preventDefault();
+    const f={full_name:$("#pName").value.trim(),phone:$("#pPhone").value.trim(),email:$("#pMail").value.trim()};
+    const okN=f.full_name.length>=2,okP=/^[0-9+\-\s()]{9,}$/.test(f.phone),okM=!f.email||/^\S+@\S+\.\S+$/.test(f.email);
+    $("#pName").setAttribute("aria-invalid",!okN);$("#pPhone").setAttribute("aria-invalid",!okP);$("#pMail").setAttribute("aria-invalid",!okM);
+    if(!okN||!okP||!okM){$("#pErr").textContent=!okN||!okP?"נא למלא שם ומספר טלפון תקין.":"כתובת המייל לא תקינה.";$("#pErr").hidden=false;return}
+    $("#pErr").hidden=true;const txt=`שלום, אשמח לקבל הצעה לאריזות מתנה בהתאמה אישית.\nשם: ${f.full_name}\nטלפון: ${f.phone}`+(f.email?`\nמייל: ${f.email}`:"");
+    if(ORDER_MODE==="netlify"){try{const r=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams({"form-name":"lead",subject:`פנייה להתאמה אישית: ${f.full_name} · ${f.phone}`,source:"חלון התאמה אישית",...f}).toString()});if(!r.ok)throw 0;notifyOwner("פנייה חדשה באתר VENIA\n"+txt)}
+      catch(x){$("#pErr").textContent="השליחה לא הצליחה. נסו שוב, או שלחו לנו הודעה בוואטסאפ.";$("#pErr").hidden=false;return}}
+    $("#popForm").hidden=true;$("#pDone").hidden=false;mark("sent");setTimeout(()=>{pop.hidden=true},3500)});
+})();
+
 // ---------- countdown strip
 const HOLIDAY_DATES=Object.fromEntries(HOLIDAYS.filter(h=>Object.values(PRODUCTS[h.id]||{}).some(a=>a&&a.length)).map(h=>[h.id,h.date]));
 (function(){
@@ -1974,8 +2027,8 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
   function why(P){
     if(P.separate.length)return `הכול לא נכנס בקופסה הגדולה, אז ${P.separate.map(s=>s.name).join(' ו')} ${P.separate.length>1?'יגיעו עטופים':'יגיע עטוף'} בנייר VENIA עם סרט זהב, צמוד ל${BCAT.packs[P.pack].name}.`;
     if(P.pack==='bag')return P.chosen.length?'הכול עדיין נכנס בשקית הממותגת.':'שקית ממותגת, דף ברכה עם הלוגו שלכם ושוקולד.';
-    if(P.pack==='med')return 'המתנות כבר לא נכנסות בשקית, אז המארז עבר לקופסה בינונית עם נייר משי. השקית יורדת מהמחיר.';
-    return 'הקופסה הבינונית קטנה מדי, אז המארז עבר לקופסה הגדולה.';
+    if(P.pack==='med')return `המתנות כבר לא נכנסות בשקית, אז המארז עבר לקופסה בינונית עם נייר משי (תוספת ₪${BCAT.packs.med.price}).`;
+    return `הקופסה הבינונית קטנה מדי, אז המארז עבר לקופסה הגדולה (תוספת ₪${BCAT.packs.lrg.price}).`;
   }
   function render(){
     if(!B.h||!q('#buildPage'))return;
