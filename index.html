@@ -866,6 +866,7 @@ body:not([data-view="home"]) .lead-sec{display:none}
 .card-sec .greet{box-shadow:0 30px 60px rgba(0,0,0,.35)}
 @media (max-width:600px){.card-sec .greet-wrap{padding:34px 22px}}
 .vid-sec .vid-wrap{grid-template-columns:1fr!important;max-width:760px;margin-inline:auto}
+#checkout input[type=email]{text-align:right}
 #checkout textarea{font:inherit;padding:11px 13px;border-radius:12px;border:1px solid rgba(20,29,51,.18);resize:vertical;width:100%}
 #checkout label small{color:var(--muted);font-weight:400}
 .done-wa{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:14px;margin-top:6px}
@@ -1300,6 +1301,8 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
       <input id="fName" name="full_name" autocomplete="name" required>
       <label for="fPhone">טלפון</label>
       <input id="fPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required>
+      <label for="fMail">כתובת מייל</label>
+      <input id="fMail" name="email" type="email" inputmode="email" autocomplete="email" dir="ltr" required>
       <label for="fBiz">שם העסק לחשבונית</label>
       <input id="fBiz" name="business" autocomplete="organization" required>
       <fieldset class="deliv">
@@ -1326,7 +1329,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
 <form name="lead" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="bot-field"><input name="subject"><input name="full_name"><input name="phone"><input name="email"></form>
 <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="bot-field"><input name="subject"><input name="full_name"><input name="phone"><input name="business"><textarea name="message"></textarea></form>
 <form name="order" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
-  <input name="bot-field"><input name="subject"><input name="full_name"><input name="phone"><input name="business"><input name="delivery"><input name="order_total"><input name="packages"><input name="discount"><textarea name="notes"></textarea><input name="order_id"><textarea name="summary"></textarea><textarea name="greeting"></textarea>
+  <input name="bot-field"><input name="subject"><input name="full_name"><input name="phone"><input name="email"><input name="business"><input name="delivery"><input name="order_total"><input name="packages"><input name="discount"><textarea name="notes"></textarea><input name="order_id"><textarea name="summary"></textarea><textarea name="greeting"></textarea>
   <input type="file" name="logo_file"><input type="file" name="card_file"><input type="file" name="logo_file_2"><input type="file" name="card_file_2"><input type="file" name="logo_file_3"><input type="file" name="card_file_3">
 </form>
 
@@ -1755,15 +1758,15 @@ $("#swapToggle").onclick=()=>{const o=$("#swapPanel").hidden;$("#swapPanel").hid
 // checkout
 function orderSummary(id,f){
   const lines=CART.map(l=>{const L=lineInfo(l);return `• ${L.title} | ${L.pack} | כמות: ${l.q} | ${shek(L.unit)} ליחידה | ${shek(l.q*L.unit)}\n   ${L.det.join("; ")}`});
-  const dp=discPct(cartCount());return `שלום, זה אישור ההזמנה שלי (מס׳ ${id}):\n${lines.join("\n")}\n`+(dp?`הנחת כמות ${dp}%: −${shek(cartDiscount())}\n`:"")+(VAT_RATE?`סה״כ לפני מע״מ: ${shek(cartTotal())}\nמע״מ ${VAT_RATE}%: ${shek(cartVat())}\n`:"")+`סה״כ לתשלום: ${shek(cartGrand())}`+(CART.some(l=>l.g&&(l.g.logo||l.g.card))?`\n(את קובצי הלוגו/הכרטיס אשלח כאן בהודעה הבאה)`:"")+`\n\nשם: ${f.full_name}\nטלפון: ${f.phone}\nשם העסק לחשבונית: ${f.business}\nמשלוח: ${f.delivery}`+(f.notes?`\nהערות: ${f.notes}`:"");
+  const dp=discPct(cartCount());return `שלום, זה אישור ההזמנה שלי (מס׳ ${id}):\n${lines.join("\n")}\n`+(dp?`הנחת כמות ${dp}%: −${shek(cartDiscount())}\n`:"")+(VAT_RATE?`סה״כ לפני מע״מ: ${shek(cartTotal())}\nמע״מ ${VAT_RATE}%: ${shek(cartVat())}\n`:"")+`סה״כ לתשלום: ${shek(cartGrand())}`+(CART.some(l=>l.g&&(l.g.logo||l.g.card))?`\n(את קובצי הלוגו/הכרטיס אשלח כאן בהודעה הבאה)`:"")+`\n\nשם: ${f.full_name}\nטלפון: ${f.phone}\nמייל: ${f.email}\nשם העסק לחשבונית: ${f.business}\nמשלוח: ${f.delivery}`+(f.notes?`\nהערות: ${f.notes}`:"");
 }
 $("#checkout").addEventListener("submit",async e=>{
   e.preventDefault();
-  const f={full_name:$("#fName").value.trim(),phone:$("#fPhone").value.trim(),business:$("#fBiz").value.trim(),delivery:$("#dHomes").checked?"לבית כל עובד":"למשרד",notes:$("#fNotes").value.trim()};
+  const f={full_name:$("#fName").value.trim(),phone:$("#fPhone").value.trim(),email:$("#fMail").value.trim(),business:$("#fBiz").value.trim(),delivery:$("#dHomes").checked?"לבית כל עובד":"למשרד",notes:$("#fNotes").value.trim()};
   const bad=[];
-  [["fName",f.full_name.length>=2],["fPhone",/^[0-9+\-\s()]{9,}$/.test(f.phone)],["fBiz",f.business.length>=2]].forEach(([id,ok])=>{$("#"+id).setAttribute("aria-invalid",!ok);if(!ok)bad.push(id)});
+  [["fName",f.full_name.length>=2],["fPhone",/^[0-9+\-\s()]{9,}$/.test(f.phone)],["fMail",/^\S+@\S+\.\S+$/.test(f.email)],["fBiz",f.business.length>=2]].forEach(([id,ok])=>{$("#"+id).setAttribute("aria-invalid",!ok);if(!ok)bad.push(id)});
   const err=$("#formErr");
-  if(bad.length){err.textContent=bad.includes("fPhone")&&bad.length===1?"מספר הטלפון לא תקין. כתבו מספר מלא, למשל 050-1234567.":"נא למלא שם מלא, טלפון ושם העסק לחשבונית.";err.hidden=false;$("#"+bad[0]).focus();return}
+  if(bad.length){err.textContent=bad.includes("fPhone")&&bad.length===1?"מספר הטלפון לא תקין. כתבו מספר מלא, למשל 050-1234567.":bad.includes("fMail")&&bad.length===1?"כתובת המייל לא תקינה. כתבו למשל name@gmail.com.":"נא למלא שם מלא, טלפון, מייל ושם העסק לחשבונית.";err.hidden=false;$("#"+bad[0]).focus();return}
   err.hidden=true;
   const id=String(Math.floor(Date.now()/1000)%90000+10000); // מספר הזמנה בן 5 ספרות
   const summary=orderSummary(id,f);
@@ -1774,7 +1777,7 @@ $("#checkout").addEventListener("submit",async e=>{
     try{
       const total=cartGrand();
       const fd=new FormData();
-      Object.entries({"form-name":"order",subject:`הזמנה חדשה: ${f.full_name}${f.business?" · "+f.business:""} · ${shek(total)}`,full_name:f.full_name,phone:f.phone,business:f.business,delivery:f.delivery,order_total:total,packages:cartCount(),discount:cartDiscount(),notes:f.notes,order_id:id,summary,greeting:CART.map((l,k)=>`${k+1}. `+gcDet(l.g).join("; ")).join("\n")}).forEach(([k,v])=>fd.append(k,v));
+      Object.entries({"form-name":"order",subject:`הזמנה חדשה: ${f.full_name}${f.business?" · "+f.business:""} · ${shek(total)}`,full_name:f.full_name,phone:f.phone,email:f.email,business:f.business,delivery:f.delivery,order_total:total,packages:cartCount(),discount:cartDiscount(),notes:f.notes,order_id:id,summary,greeting:CART.map((l,k)=>`${k+1}. `+gcDet(l.g).join("; ")).join("\n")}).forEach(([k,v])=>fd.append(k,v));
       CART.slice(0,3).forEach((l,k)=>{const F=GFILES[lineKey(l)]||{},sx=k?"_"+(k+1):"";if(F.logo)fd.append("logo_file"+sx,F.logo);if(F.card)fd.append("card_file"+sx,F.card)});
       const r=await fetch("/",{method:"POST",body:fd});
       if(!r.ok)throw new Error(r.status);
@@ -1792,7 +1795,7 @@ $("#checkout").addEventListener("submit",async e=>{
   CART=[];saveCart();updateBadge();$("#fNotes").value="";
   $("#cartMain").hidden=true;$("#cartDone").hidden=false;
 });
-["fName","fPhone","fBiz"].forEach(id=>$("#"+id).addEventListener("input",()=>{$("#"+id).removeAttribute("aria-invalid");$("#formErr").hidden=true}));
+["fName","fPhone","fMail","fBiz"].forEach(id=>$("#"+id).addEventListener("input",()=>{$("#"+id).removeAttribute("aria-invalid");$("#formErr").hidden=true}));
 updateBadge();renderCart();
 
 // ---------- search (header + holidays section)
