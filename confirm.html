@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>VENIA | אישור הזמנה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=Frank+Ruhl+Libre:wght@500;700&display=swap">
+<style>
+:root{--bg:#f5f3ee;--card:#fff;--ink:#141d33;--muted:#5d6577;--line:rgba(20,29,51,.12);--brand:#141d33;--gold:#b08d4a;--gold-soft:#faf5ea;--ok:#2f7d55;--bad:#b23b3b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Heebo",Arial,sans-serif;font-size:16px;line-height:1.55}
+.top{background:var(--brand);color:#fff;text-align:center;padding:calc(18px + env(safe-area-inset-top,0px)) 16px 18px}
+.word{font-family:"Frank Ruhl Libre",Georgia,serif;letter-spacing:.42em;font-size:24px;color:#e6c98e;direction:ltr;margin-inline-start:.42em}
+.top small{display:block;color:#c9c1ae;font-size:13px;margin-top:2px}
+main{max-width:620px;margin:0 auto;padding:22px max(16px,env(safe-area-inset-right,0px)) 60px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:16px}
+h1{font-family:"Frank Ruhl Libre",Georgia,serif;font-size:clamp(26px,6vw,34px);margin:4px 0 0;text-align:center;text-wrap:balance}
+.lead{margin:0;text-align:center;color:var(--muted)}
+.card{background:var(--card);border-radius:18px;padding:18px;box-shadow:0 1px 2px rgba(20,29,51,.06),0 10px 28px rgba(20,29,51,.07);display:flex;flex-direction:column;gap:10px}
+.card h2{margin:0;font-size:17px}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;margin:0;font-size:15px}
+.kv dt{color:var(--muted)}.kv dd{margin:0;overflow-wrap:anywhere}
+.lines{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.lines li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding-bottom:6px;font-size:15px}
+.lines li small{display:block;color:var(--muted);font-size:13px}
+.tot{display:flex;justify-content:space-between;font-weight:700}
+.due{background:var(--brand);color:#fff;border-radius:18px;padding:18px;text-align:center}
+.due span{color:#c9c1ae;font-size:14px}
+.due b{display:block;font-size:38px;font-weight:800;color:#e6c98e;line-height:1.2}
+.pay{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:520px){.pay{grid-template-columns:1fr}}
+.pay .card{gap:6px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:15px}
+.row span{color:var(--muted)}
+.row b{font-variant-numeric:tabular-nums}
+.copy{border:1px solid var(--line);background:var(--gold-soft);color:#7d5f24;border-radius:999px;font:inherit;font-size:12px;font-weight:700;padding:2px 10px;cursor:pointer}
+label{font-weight:600;font-size:15px}
+.file{border:2px dashed rgba(176,141,74,.6);border-radius:14px;padding:16px;text-align:center;background:var(--gold-soft);cursor:pointer;display:block}
+.file input{display:block;margin:8px auto 0;max-width:100%}
+.file small{display:block;color:var(--muted);font-weight:400}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400}
+.check input{margin-top:5px;width:18px;height:18px;flex:none}
+.btn{border:0;border-radius:999px;background:var(--brand);color:#fff;font:inherit;font-weight:800;font-size:17px;padding:14px 18px;cursor:pointer;width:100%}
+.btn:disabled{opacity:.6}
+.err{color:var(--bad);margin:0;font-weight:600}
+.done{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
+.seal{width:64px;height:64px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:30px}
+.wa{display:inline-flex;gap:8px;align-items:center;background:#1fa855;color:#fff;text-decoration:none;font-weight:700;border-radius:999px;padding:10px 18px}
+.foot{text-align:center;color:var(--muted);font-size:13px}
+#page{display:flex;flex-direction:column;gap:16px}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+</style>
+</head>
+<body>
+<header class="top"><div class="word">VENIA</div><small>מתנות יוקרה לעובדים בכשרות מהודרת</small></header>
+<main>
+  <section id="bad" class="card" hidden><h2>הקישור לא תקין</h2><p>ייתכן שהקישור נחתך. אפשר לבקש קישור חדש בוואטסאפ <span dir="ltr">053-591-0605</span>.</p></section>
+
+  <div id="page" hidden>
+    <h1 id="title">אישור הזמנה</h1>
+    <p class="lead" id="lead"></p>
+
+    <section class="card"><h2>פרטי ההזמנה</h2>
+      <dl class="kv" id="who"></dl>
+      <ul class="lines" id="lines"></ul>
+      <div class="tot"><span>סה״כ ההזמנה</span><span id="tot"></span></div>
+    </section>
+
+    <section class="due"><span id="dueLbl">לתשלום עכשיו</span><b id="due"></b><span id="dueNote"></span></section>
+
+    <div class="pay">
+      <section class="card"><h2>העברה בנקאית</h2>
+        <div class="row"><span>בנק</span><b>פאג״י (52)</b></div>
+        <div class="row"><span>סניף</span><b>רשב״י (186)</b></div>
+        <div class="row"><span>מספר חשבון</span><b>52103 <button type="button" class="copy" data-copy="52103">העתקה</button></b></div>
+        <div class="row"><span>על שם</span><b>גרוס דוד נתן</b></div>
+      </section>
+      <section class="card"><h2>ביט</h2>
+        <div class="row"><span>למספר</span><b dir="ltr">053-591-0605 <button type="button" class="copy" data-copy="0535910605">העתקה</button></b></div>
+        <p class="foot" style="text-align:start;margin:0">בהערה לתשלום כתבו את מספר ההזמנה.</p>
+      </section>
+    </div>
+
+    <form id="f" class="card" novalidate>
+      <h2>אחרי התשלום</h2>
+      <label class="file" for="proof">צרפו אישור העברה או צילום מסך מביט
+        <small>תמונה או PDF, עד 8MB</small>
+        <input id="proof" name="proof" type="file" accept="image/*,application/pdf" required>
+      </label>
+      <label class="check" id="agreeBox"><input type="checkbox" id="agree"> <span id="agreeTxt">אני מאשר/ת את פרטי ההזמנה ואת תנאי התשלום: 50% מקדמה עכשיו, ו־50% לפני המשלוח.</span></label>
+      <p class="err" id="err" hidden></p>
+      <button class="btn" id="go" type="submit">אישור ההזמנה</button>
+    </form>
+  </div>
+
+  <section id="done" class="card done" hidden>
+    <div class="seal">✓</div>
+    <h1 id="doneH">ההזמנה אושרה</h1>
+    <p id="doneTxt"></p>
+    <a class="wa" id="doneWa" target="_blank" rel="noopener" href="#">שליחת עותק בוואטסאפ (לא חובה)</a>
+  </section>
+  <p class="foot">VENIA · <span dir="ltr">054-853-5976</span> · Veniagift@gmail.com</p>
+</main>
+
+<form name="payment" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
+  <input name="bot-field"><input name="subject"><input name="order_id"><input name="kind"><input name="business"><input name="full_name"><input name="amount"><input name="order_total"><textarea name="order_summary"></textarea><input type="file" name="proof">
+</form>
+
+<script>
+(function(){
+  const $=s=>document.querySelector(s);
+  const nis=n=>'₪'+Math.round(+n||0).toLocaleString('he-IL');
+  const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  let D=null;
+  try{const q=new URLSearchParams(location.search).get('d');let b=q.replace(/-/g,'+').replace(/_/g,'/');while(b.length%4)b+='=';
+    D=JSON.parse(decodeURIComponent(escape(atob(b))))}catch(e){D=null}
+  if(!D||!D.i||!D.a){$('#bad').hidden=false;return}
+  const bal=D.k==='bal';
+  document.title='VENIA | '+(bal?'תשלום יתרה':'אישור הזמנה');
+  $('#title').textContent=bal?'תשלום יתרה לפני משלוח':'אישור הזמנה';
+  $('#lead').textContent=bal?'המארזים מוכנים. אחרי תשלום היתרה הם יוצאים אליכם למשלוח.':'כדי לאשר את ההזמנה משלמים מקדמה של 50% ומצרפים את אישור התשלום.';
+  $('#who').innerHTML=`<dt>מספר הזמנה</dt><dd dir="ltr" style="text-align:right">${esc(D.i)}</dd>${D.b?`<dt>עסק</dt><dd>${esc(D.b)}</dd>`:''}${D.n?`<dt>שם</dt><dd>${esc(D.n)}</dd>`:''}`;
+  $('#lines').innerHTML=(D.l||[]).map(x=>`<li><span>${esc(x[0])}${x[2]?`<small>${esc(x[2])}</small>`:''}</span><span>× ${esc(x[1])}</span></li>`).join('')+(D.d?`<li><span>הנחת כמות</span><span>−${nis(D.d)}</span></li>`:'');
+  $('#tot').textContent=nis(D.t);
+  $('#dueLbl').textContent=bal?'יתרה לתשלום':'מקדמה לתשלום עכשיו';
+  $('#due').textContent=nis(D.a);
+  $('#dueNote').textContent=bal?'50% השני מתוך '+nis(D.t):'50% מתוך '+nis(D.t)+'. היתרה תשולם לפני המשלוח.';
+  if(bal){$('#agreeTxt').textContent='שילמתי את יתרת ההזמנה.';$('#go').textContent='שליחת אישור התשלום'}
+  $('#page').hidden=false;
+
+  document.addEventListener('click',async e=>{const c=e.target.closest('[data-copy]');if(!c)return;
+    try{await navigator.clipboard.writeText(c.dataset.copy);c.textContent='הועתק'}catch(x){c.textContent=c.dataset.copy}
+    setTimeout(()=>c.textContent='העתקה',1800)});
+
+  const summary=()=>[(bal?'תשלום יתרה':'אישור הזמנה ומקדמה')+` · הזמנה ${D.i}`,D.b?`עסק: ${D.b}`:'',D.n?`שם: ${D.n}`:'',...(D.l||[]).map(x=>`• ${x[0]} × ${x[1]}`),`סה״כ ההזמנה: ${nis(D.t)}`,`שולם עכשיו: ${nis(D.a)}`].filter(Boolean).join('\n');
+  $('#f').addEventListener('submit',async e=>{e.preventDefault();const err=$('#err');err.hidden=true;
+    const file=$('#proof').files[0];
+    if(!file){err.textContent='צריך לצרף את אישור התשלום (צילום מסך או PDF).';err.hidden=false;return}
+    if(file.size>8*1024*1024){err.textContent='הקובץ גדול מדי. אפשר לצלם מסך ולצרף את התמונה.';err.hidden=false;return}
+    if(!$('#agree').checked){err.textContent=bal?'סמנו שהיתרה שולמה.':'צריך לסמן שאתם מאשרים את פרטי ההזמנה.';err.hidden=false;return}
+    const btn=$('#go');btn.disabled=true;btn.textContent='שולח…';
+    const fd=new FormData();
+    Object.entries({'form-name':'payment',subject:`${bal?'יתרה שולמה':'מקדמה התקבלה'}: ${D.b||D.n||''} · ${nis(D.a)} (הזמנה ${D.i})`,order_id:D.i,kind:bal?'יתרה 50%':'מקדמה 50%',business:D.b||'',full_name:D.n||'',amount:D.a,order_total:D.t,order_summary:summary()}).forEach(([k,v])=>fd.append(k,v));
+    fd.append('proof',file);
+    try{const r=await fetch('/',{method:'POST',body:fd});if(!r.ok)throw 0}
+    catch(x){btn.disabled=false;btn.textContent=bal?'שליחת אישור התשלום':'אישור ההזמנה';err.innerHTML='השליחה לא הצליחה בגלל תקלה בחיבור. נסו שוב, או שלחו את צילום המסך בוואטסאפ ל־<span dir="ltr">053-591-0605</span>.';err.hidden=false;return}
+    $('#page').hidden=true;$('#done').hidden=false;window.scrollTo(0,0);
+    $('#doneH').textContent=bal?'התשלום התקבל, תודה!':'ההזמנה אושרה, תודה!';
+    $('#doneTxt').textContent=bal?'נבדוק את התשלום והמארזים יצאו אליכם למשלוח. ניצור קשר לתיאום.':'קיבלנו את אישור התשלום. נתחיל להכין את המארזים וניצור איתכם קשר לפני המשלוח.';
+    $('#doneWa').href='https://wa.me/972535910605?text='+encodeURIComponent(summary()+'\n(צילום המסך של התשלום מצורף בהודעה הבאה)');
+  });
+})();
+</script>
+</body>
+</html>
