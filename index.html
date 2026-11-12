@@ -881,6 +881,7 @@ body:not([data-view="home"]) .lead-sec{display:none}
 .cf-note{margin:0;font-size:13px;color:var(--muted);text-align:center}
 #cfBack{align-self:center}
 @media (max-width:560px){.bld-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.bld-step{padding:14px}.bld-item .bi-img{aspect-ratio:4/3}.bld-item b{font-size:13px}.bld-item .stp button{width:30px}}
+.bld-disc-note{margin:0;font-size:12px;color:var(--muted)}
 .fab{position:fixed;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;display:flex;flex-direction:column;gap:10px}
 .h-ico{width:52px;height:52px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;padding:0;text-decoration:none;cursor:pointer;box-shadow:0 8px 22px rgba(20,29,51,.28)}
 .h-ico svg{width:26px;height:26px}
@@ -1054,6 +1055,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
         <section class="bld-step" aria-labelledby="bs3">
           <div class="st-hd"><span class="bld-n">2</span><div><h2 id="bs3">מוסיפים מתנות</h2><p>כל מתנה בתוספת תשלום. כשהמתנות כבר לא נכנסות בשקית, המארז עובר אוטומטית לקופסה בינונית.</p></div></div>
           <div class="bld-items" id="bldItems"></div>
+          <p class="bld-disc-note">התמונות להמחשה בלבד.</p>
         </section>
 
         <section class="bld-step" aria-labelledby="bs4">
@@ -1394,7 +1396,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
     <nav class="foot-col" aria-label="ניווט תחתון"><b>ניווט</b><a href="#" data-nav="home">דף הבית</a><a href="#gifts" data-nav="gifts">מתנות לחגים</a><a href="#about" data-nav="about">אודות</a><a href="#faq" data-nav="faq">שאלות נפוצות</a><a href="#contact" data-nav="contact">צור קשר</a></nav>
     <div class="foot-col"><b>צור קשר</b><a dir="ltr" class="num" href="tel:+972548535975">054-853-5975</a><a dir="ltr" class="mail" href="mailto:Veniagift@gmail.com">Veniagift@gmail.com</a><a href="https://wa.me/972535910605" target="_blank" rel="noopener">וואטסאפ לתיאום אישי</a></div>
   </div>
-  <div class="wrap foot-bottom"><span>© 2026 VENIA</span><span>כל הזכויות שמורות</span><button type="button" class="linkish" data-a11y-doc>הצהרת נגישות</button></div>
+  <div class="wrap foot-bottom"><span>© 2026 VENIA</span><span>כל הזכויות שמורות</span><span>התמונות להמחשה בלבד. ט.ל.ח.</span><button type="button" class="linkish" data-a11y-doc>הצהרת נגישות</button></div>
 </footer>
 
 <script>
@@ -2008,7 +2010,8 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
       <div class="bs-calc"><div><span>${n} מארזים × ${nis(P.unit)}</span><span>${nis(sub)}</span></div>${dp?`<div class="dsc"><span>הנחת כמות ${dp}%</span><span>−${nis(dAmt)}</span></div>`:''}<div class="tot"><span>סה״כ</span><b>${nis(sub-dAmt)}</b></div>${nextD?`<p>עוד ${nextD.min-n} מארזים ותקבלו הנחה של ${nextD.pct}%</p>`:''}</div>
       <button type="button" class="add bs-add" id="bldAdd">הוספה לסל</button>
       <p class="bs-ok" id="bldAdded" hidden>נוסף לסל. <button type="button" class="linkish" id="bldGoCart">מעבר לסל ולהזמנה</button></p>
-      <p class="bs-note">אחרי ההזמנה נבדוק מלאי ונשלח לכם הדמיה עם הלוגו לאישור. הנחות כמות מחושבות בסל.</p>`;
+      <p class="bs-note">אחרי ההזמנה נבדוק מלאי ונשלח לכם הדמיה עם הלוגו לאישור. הנחות כמות מחושבות בסל.</p>
+      <p class="bs-note">התמונות להמחשה בלבד. ט.ל.ח.</p>`;
     q('#bldBarP').textContent=nis(P.unit);
     gcPrev();
   }
