@@ -1764,7 +1764,7 @@ $("#checkout").addEventListener("submit",async e=>{
   const err=$("#formErr");
   if(bad.length){err.textContent=bad.includes("fPhone")&&bad.length===1?"מספר הטלפון לא תקין. כתבו מספר מלא, למשל 050-1234567.":"נא למלא שם מלא, טלפון ושם העסק לחשבונית.";err.hidden=false;$("#"+bad[0]).focus();return}
   err.hidden=true;
-  const id=new Date().toISOString().slice(2,10).replace(/-/g,"")+"-"+Math.random().toString(36).slice(2,6).toUpperCase();
+  const id=String(Math.floor(Date.now()/1000)%90000+10000); // מספר הזמנה בן 5 ספרות
   const summary=orderSummary(id,f);
   const waHref="https://wa.me/972535910605?text="+encodeURIComponent(summary);
   const btn=$("#submitBtn");
