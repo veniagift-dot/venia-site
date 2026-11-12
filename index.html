@@ -866,6 +866,15 @@ body:not([data-view="home"]) .lead-sec{display:none}
 .card-sec .greet{box-shadow:0 30px 60px rgba(0,0,0,.35)}
 @media (max-width:600px){.card-sec .greet-wrap{padding:34px 22px}}
 .vid-sec .vid-wrap{grid-template-columns:1fr!important;max-width:760px;margin-inline:auto}
+.confirm-box{display:flex;flex-direction:column;gap:12px;background:#fff;border-radius:18px;padding:20px;box-shadow:var(--shadow);border:1px solid rgba(176,141,74,.35)}
+.confirm-box h3{margin:0;font-size:20px}
+.cf-step{font-size:12px;font-weight:700;letter-spacing:.06em;color:#7d5f24}
+.cf-sum{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;margin:0;font-size:15px}
+.cf-sum dd[dir=ltr]{text-align:right}.cf-sum dt{color:var(--muted)}.cf-sum dd{margin:0;overflow-wrap:anywhere}
+.cf-go{display:flex;align-items:center;justify-content:center;gap:10px;background:#1fa855;color:#fff;text-decoration:none;font-weight:800;font-size:17px;border-radius:999px;padding:14px 18px}
+.cf-go svg{width:22px;height:22px}
+.cf-note{margin:0;font-size:13px;color:var(--muted);text-align:center}
+#cfBack{align-self:center}
 .fab{position:fixed;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;display:flex;flex-direction:column;gap:10px}
 .h-ico{width:52px;height:52px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;padding:0;text-decoration:none;cursor:pointer;box-shadow:0 8px 22px rgba(20,29,51,.28)}
 .h-ico svg{width:26px;height:26px}
@@ -1294,9 +1303,17 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
         <label><input type="radio" name="delivery" id="dHomes" value="לבית כל עובד"> משלוח לבית כל עובד</label>
       </fieldset>
       <p class="err" id="formErr" hidden></p>
-      <button type="submit" class="add wide" id="submitBtn">שליחת הזמנה</button>
-      <p class="note">אחרי ההזמנה ניצור איתכם קשר לתיאום משלוח ופרטים סופיים.</p>
+      <button type="submit" class="add wide" id="submitBtn">המשך לאישור ההזמנה</button>
+      <p class="note">בשלב הבא תראו סיכום ותאשרו את ההזמנה.</p>
     </form>
+    <div id="cartConfirm" class="confirm-box" hidden>
+      <span class="cf-step">שלב אחרון</span>
+      <h3>אישור ההזמנה</h3>
+      <dl class="cf-sum" id="cfSum"></dl>
+      <a class="cf-go" id="cfGo" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.7 5.8 5.1 2.2.9 3 1 4.1.8.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg><span>אישור ושליחת ההזמנה</span></a>
+      <p class="cf-note">בלחיצה ייפתח הוואטסאפ עם פרטי ההזמנה מוכנים. לוחצים <b>שליחה</b>, וההזמנה אצלנו.</p>
+      <button type="button" class="linkish" id="cfBack">חזרה לעריכת הפרטים</button>
+    </div>
   </div>
   <div id="cartDone" hidden>
     <div class="done-seal">✓</div>
@@ -1739,9 +1756,10 @@ $("#swapToggle").onclick=()=>{const o=$("#swapPanel").hidden;$("#swapPanel").hid
 // checkout
 function orderSummary(id,f){
   const lines=CART.map(l=>{const L=lineInfo(l);return `• ${L.title} | ${L.pack} | כמות: ${l.q} | ${shek(L.unit)} ליחידה | ${shek(l.q*L.unit)}\n   ${L.det.join("; ")}`});
-  const dp=discPct(cartCount());return `שלום, אני רוצה לבצע הזמנה (מס׳ ${id}):\n${lines.join("\n")}\n`+(dp?`הנחת כמות ${dp}%: −${shek(cartDiscount())}\n`:"")+(VAT_RATE?`סה״כ לפני מע״מ: ${shek(cartTotal())}\nמע״מ ${VAT_RATE}%: ${shek(cartVat())}\n`:"")+`סה״כ לתשלום: ${shek(cartGrand())}`+(CART.some(l=>l.g&&(l.g.logo||l.g.card))?`\n(את קובצי הלוגו/הכרטיס אשלח כאן בהודעה הבאה)`:"")+`\n\nשם: ${f.full_name}\nטלפון: ${f.phone}\nשם העסק לחשבונית: ${f.business}\nמשלוח: ${f.delivery}`;
+  const dp=discPct(cartCount());return `שלום, זה אישור ההזמנה שלי (מס׳ ${id}):\n${lines.join("\n")}\n`+(dp?`הנחת כמות ${dp}%: −${shek(cartDiscount())}\n`:"")+(VAT_RATE?`סה״כ לפני מע״מ: ${shek(cartTotal())}\nמע״מ ${VAT_RATE}%: ${shek(cartVat())}\n`:"")+`סה״כ לתשלום: ${shek(cartGrand())}`+(CART.some(l=>l.g&&(l.g.logo||l.g.card))?`\n(את קובצי הלוגו/הכרטיס אשלח כאן בהודעה הבאה)`:"")+`\n\nשם: ${f.full_name}\nטלפון: ${f.phone}\nשם העסק לחשבונית: ${f.business}\nמשלוח: ${f.delivery}`;
 }
-$("#checkout").addEventListener("submit",async e=>{
+let PENDING=null;const escH=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+$("#checkout").addEventListener("submit",e=>{
   e.preventDefault();
   const f={full_name:$("#fName").value.trim(),phone:$("#fPhone").value.trim(),business:$("#fBiz").value.trim(),delivery:$("#dHomes").checked?"לבית כל עובד":"למשרד"};
   const bad=[];
@@ -1750,31 +1768,30 @@ $("#checkout").addEventListener("submit",async e=>{
   if(bad.length){err.textContent=bad.includes("fPhone")&&bad.length===1?"מספר הטלפון לא תקין. כתבו מספר מלא, למשל 050-1234567.":"נא למלא שם מלא, טלפון ושם העסק לחשבונית.";err.hidden=false;$("#"+bad[0]).focus();return}
   err.hidden=true;
   const id=new Date().toISOString().slice(2,10).replace(/-/g,"")+"-"+Math.random().toString(36).slice(2,6).toUpperCase();
-  const waHref="https://wa.me/972535910605?text="+encodeURIComponent(orderSummary(id,f));
+  const summary=orderSummary(id,f);
+  PENDING={id,f,summary,wa:"https://wa.me/972535910605?text="+encodeURIComponent(summary)};
+  $("#cfSum").innerHTML=`<dt>שם</dt><dd>${escH(f.full_name)}</dd><dt>עסק</dt><dd>${escH(f.business)}</dd><dt>טלפון</dt><dd dir="ltr">${escH(f.phone)}</dd><dt>משלוח</dt><dd>${escH(f.delivery)}</dd><dt>מארזים</dt><dd>${cartCount()}</dd><dt>סה״כ לתשלום</dt><dd><b>${shek(cartGrand())}</b></dd>`;
+  $("#cfGo").href=PENDING.wa;
+  $("#checkout").hidden=true;$("#cartConfirm").hidden=false;$("#cfGo").focus();
+});
+$("#cfBack").onclick=()=>{$("#cartConfirm").hidden=true;$("#checkout").hidden=false};
+$("#cfGo").addEventListener("click",async()=>{ // the link itself opens WhatsApp in a new tab; here we also record the order
+  if(!PENDING)return;const {id,f,summary,wa}=PENDING;PENDING=null;
+  let saved=ORDER_MODE!=="netlify";
   if(ORDER_MODE==="netlify"){
-    const btn=$("#submitBtn");btn.disabled=true;btn.textContent="שולח…";
     try{
       const total=cartGrand();
-      const summary=orderSummary(id,f);
       const fd=new FormData();
       Object.entries({"form-name":"order",subject:`הזמנה חדשה: ${f.full_name}${f.business?" · "+f.business:""} · ${shek(total)}`,full_name:f.full_name,phone:f.phone,business:f.business,delivery:f.delivery,order_total:total,packages:cartCount(),discount:cartDiscount(),order_id:id,summary,greeting:CART.map((l,k)=>`${k+1}. `+gcDet(l.g).join("; ")).join("\n")}).forEach(([k,v])=>fd.append(k,v));
       CART.slice(0,3).forEach((l,k)=>{const F=GFILES[lineKey(l)]||{},sx=k?"_"+(k+1):"";if(F.logo)fd.append("logo_file"+sx,F.logo);if(F.card)fd.append("card_file"+sx,F.card)});
-      const r=await fetch("/",{method:"POST",body:fd});
-      if(!r.ok)throw new Error(r.status);
-      notifyOwner("הזמנה חדשה באתר VENIA\n\n"+summary);
-      $("#doneText").textContent=`מספר הזמנה: ${id}. ניצור איתכם קשר בהקדם לתיאום משלוח ופרטים סופיים.`;
-      $("#doneWa").hidden=true;
-    }catch(x){
-      btn.disabled=false;btn.textContent="שליחת הזמנה";
-      err.textContent="ההזמנה לא נשלחה בגלל תקלה בחיבור. נסו שוב, או שלחו אותה בוואטסאפ.";err.hidden=false;
-      $("#doneWa").href=waHref;return;
-    }
-    btn.disabled=false;btn.textContent="שליחת הזמנה";
-  }else{
-    $("#doneText").textContent=`מספר הזמנה: ${id}. כדי לסיים, לחצו על הכפתור ושלחו את ההודעה שתיפתח בוואטסאפ. ניצור איתכם קשר לתיאום משלוח ופרטים סופיים.`;
-    $("#doneWa").href=waHref;$("#doneWa").hidden=false;
+      const r=await fetch("/",{method:"POST",body:fd});saved=r.ok;
+      if(saved)notifyOwner("הזמנה חדשה באתר VENIA\n\n"+summary);
+    }catch(x){saved=false}
   }
+  $("#doneText").textContent=saved?`מספר הזמנה: ${id}. אם הוואטסאפ לא נפתח או שלא שלחתם את ההודעה, אפשר לשלוח אותה מכאן.`:`מספר הזמנה: ${id}. כדי שההזמנה תגיע אלינו, ודאו ששלחתם את הודעת הוואטסאפ. אם היא לא נפתחה, לחצו כאן:`;
+  $("#doneWa").href=wa;$("#doneWa").hidden=false;
   CART=[];saveCart();updateBadge();
+  $("#cartConfirm").hidden=true;$("#checkout").hidden=false;
   $("#cartMain").hidden=true;$("#cartDone").hidden=false;
 });
 ["fName","fPhone","fBiz"].forEach(id=>$("#"+id).addEventListener("input",()=>{$("#"+id).removeAttribute("aria-invalid");$("#formErr").hidden=true}));
