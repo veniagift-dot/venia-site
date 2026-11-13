@@ -1054,7 +1054,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
       <div class="bld-hero-text">
         <span class="bld-eyebrow" id="bldEyebrow"></span>
         <h1 id="bldH">מארזים</h1>
-        <p class="lead bld-lead">כל מארז מגיע בשקית ממותגת,<br>עם דף ברכה אישי ושוקולד משובח.<br><span>מוסיפים מתנות, והמארז גדל איתכם.</span></p>
+        <p class="lead bld-lead">כל מארז מגיע בשקית ממותגת,<br>עם דף ברכה אישי, שוקולד משובח ותבנית סיליקון לדונאטס.<br><span>מוסיפים מתנות, והמארז גדל איתכם.</span></p>
       </div>
       
     </div>
@@ -1064,7 +1064,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
 
 
         <section class="bld-step" aria-labelledby="bs2">
-          <div class="st-hd"><span class="bld-n">1</span><div><h2 id="bs2">בוחרים גודל שוקולד</h2><p>המחיר כולל שקית ממותגת ודף ברכה עם הלוגו שלכם.</p></div></div>
+          <div class="st-hd"><span class="bld-n">1</span><div><h2 id="bs2">בוחרים גודל שוקולד</h2><p>המחיר כולל שקית ממותגת, תבנית סיליקון לדונאטס ודף ברכה עם הלוגו שלכם.</p></div></div>
           <div class="bld-chocs" id="bldChocs"></div>
         </section>
 
@@ -1263,7 +1263,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
     <details><summary>אפשר לשלוח את המארזים ישירות לבית כל עובד?</summary><p>כן. בסיום ההזמנה בוחרים "משלוח לבית כל עובד", ואנחנו ניצור קשר כדי לקבל את רשימת הכתובות.</p></details>
     <details><summary>כמה זמן לוקח המשלוח?</summary><p>אנחנו שולחים לכל הארץ. זמן האספקה נקבע לפי אזור המשלוח, ויש גם אפשרות למשלוח מהיר או אקספרס. נתאם איתכם את המועד המדויק אחרי ההזמנה.</p></details>
     <details><summary>מקבלים חשבונית מס?</summary><p>כן. בסיום ההזמנה רושמים את שם העסק לחשבונית.</p></details>
-    <details><summary>איך בונים מארז?</summary><p>כל מארז מתחיל מהבסיס: שקית ממותגת, שוקולד ודף ברכה עם הלוגו שלכם. מחיר הבסיס נקבע לפי גודל השוקולד. מוסיפים מתנות לפי הטעם, וכשהן לא נכנסות בשקית המארז עובר אוטומטית לקופסה בינונית או גדולה. מוצר גדול במיוחד מגיע עטוף בנפרד, צמוד למארז.</p></details>
+    <details><summary>איך בונים מארז?</summary><p>כל מארז מתחיל מהבסיס: שקית ממותגת, שוקולד, תבנית סיליקון לדונאטס ודף ברכה עם הלוגו שלכם. מחיר הבסיס נקבע לפי גודל השוקולד. מוסיפים מתנות לפי הטעם, וכשהן לא נכנסות בשקית המארז עובר אוטומטית לקופסה בינונית או גדולה. מוצר גדול במיוחד מגיע עטוף בנפרד, צמוד למארז.</p></details>
     
     <details><summary>אפשר להוסיף את הלוגו של החברה?</summary><p>כן. בכל מארז יש כרטיס ברכה עם הלוגו של החברה, בלי תוספת תשלום.</p></details>
     <details><summary>איך משלמים?</summary><p>אחרי שליחת ההזמנה ניצור איתכם קשר לסגירת הפרטים הסופיים. לאחר אישור סופי משלמים את מלוא סכום ההזמנה, מקבלים חשבונית, ואנחנו מתחילים בהכנת המארזים. אפשר לשלם בהעברה בנקאית או בביט.</p></details>
@@ -1477,7 +1477,8 @@ UPGRADES.sort((a,b)=>a.price-b.price);
 // כל המחירים והנפחים כאן לדוגמה — לעדכן לערכים האמיתיים
 var BCAT={
   cap:{bag:8,med:15,lrg:30},          // נקודות: כמה נכנס בכל אריזה
-  bag:13,                              // שקית + כרטיס ברכה. בסיס עם 2 פרלינים = 13+17 = ₪30
+  bag:38,                              // שקית + כרטיס ברכה + תבנית סיליקון. בסיס עם 2 פרלינים = 38+17 = ₪55
+  base:{name:'תבנית סיליקון לדונאטס',img:'img/item-mold.jpg',pts:3},
   packs:{bag:{name:'שקית ממותגת',price:0},med:{name:'קופסה בינונית',price:52},lrg:{name:'קופסה גדולה',price:90}},
   wrap:10,
   choc:[ // מחיר הבסיס = שקית + דף ברכה + השוקולד
@@ -1494,7 +1495,6 @@ var BCAT={
     hanukkah:[
       {id:'dre',name:'שלישיית סביבוני עץ',img:'img/item-dreidels.jpg',price:7,pts:1},
       {id:'cut',name:'סט חותכני עוגיות לחנוכה',img:'img/item-cutters.jpg',price:34,pts:2},
-      {id:'mold',name:'תבנית סיליקון לדונאטס',img:'img/item-mold.jpg',price:26,pts:3},
       {id:'men',name:'חנוכיית זכוכית',img:'img/up-menorah.jpg',price:35,pts:15},
       {id:'menL',name:'חנוכיית זכוכית גדולה',img:'img/up-menorah-large.jpg',price:80,pts:30}],
     general:[
@@ -1509,7 +1509,8 @@ function bItems(hid){return [...(BCAT.items[hid]||[]).map(x=>({...x,g:hid})),...
 function bPlan(hid,cid,qmap){
   const cap=BCAT.cap, choc=BCAT.choc.find(c=>c.id===cid)||BCAT.choc[0], all=bItems(hid);
   const chosen=all.filter(i=>(qmap||{})[i.id]>0).flatMap(i=>Array.from({length:qmap[i.id]},()=>i));
-  const pts=choc.pts+chosen.reduce((a,i)=>a+i.pts,0);
+  const basePts=(BCAT.base?BCAT.base.pts:0);
+  const pts=choc.pts+basePts+chosen.reduce((a,i)=>a+i.pts,0);
   const fit=p=>p<=cap.bag?'bag':p<=cap.med?'med':p<=cap.lrg?'lrg':null;
   let inside=chosen.slice(),separate=[],pack=fit(pts),rest=pts;
   if(!pack){
@@ -1517,7 +1518,7 @@ function bPlan(hid,cid,qmap){
     for(const o of order){if(rest<=cap.lrg)break;separate.push(o);inside.splice(inside.indexOf(o),1);rest-=o.pts}
     pack=fit(rest)||'lrg';
   }
-  const inPts=choc.pts+inside.reduce((a,i)=>a+i.pts,0);
+  const inPts=choc.pts+basePts+inside.reduce((a,i)=>a+i.pts,0);
   const boxAdd=pack==='bag'?0:BCAT.packs[pack].price;
   const unit=bBase(choc)+boxAdd+chosen.reduce((a,i)=>a+i.price,0)+separate.length*BCAT.wrap;
   const counts=all.filter(i=>(qmap||{})[i.id]>0).map(i=>({...i,q:qmap[i.id]}));
@@ -2014,11 +2015,11 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
   function stage(P){
     let html='';
     if(P.pack==='bag'){
-      const side=[cardTile(1.5),tile(P.choc,1.1),...P.inside.map(i=>tile(i,1))].join('');
+      const side=[cardTile(1.5),tile(P.choc,1.1),tile(BCAT.base,1),...P.inside.map(i=>tile(i,1))].join('');
       html=`<div class="pk-wrap"><div class="pk-bagset"><div class="pk-bag"><span class="handle h1"></span><span class="handle h2"></span><div class="front"></div><span class="pk-word">VENIA</span><span class="pk-sub">מתנות יוקרה לעובדים</span></div><div class="bs-side bs-items">${side}</div></div></div>`;
     }else{
       const k=P.pack==='med'?(P.inPts>9?.8:1):(P.inPts>15?.78:.92);
-      const tiles=[cardTile(1),tile(P.choc,k),...P.inside.map(i=>tile(i,k))].join('');
+      const tiles=[cardTile(1),tile(P.choc,k),tile(BCAT.base,k),...P.inside.map(i=>tile(i,k))].join('');
       html=`<div class="pk-wrap"><div class="pk-box ${P.pack==='med'?'m':'l'}"><div class="lid"></div><span class="bow"></span><div class="base"><div class="tissue"></div><div class="in">${tiles}</div><span class="tag">VENIA</span></div></div><span class="pk-cap">${BCAT.packs[P.pack].name}</span></div>`;
     }
     html+=P.separate.map(s=>`<span class="pk-plus" aria-hidden="true">+</span><div class="pk-wrap"><div class="pk-gift"><div class="g"></div><span class="bow"></span><span class="label">${s.img?`<img src="${s.img}" alt="">`:''}</span></div><span class="pk-cap">${esc(s.name)}<br>עטוף בנפרד</span></div>`).join('');
@@ -2026,7 +2027,7 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
   }
   function why(P){
     if(P.separate.length)return `הכול לא נכנס בקופסה הגדולה, אז ${P.separate.map(s=>s.name).join(' ו')} ${P.separate.length>1?'יגיעו עטופים':'יגיע עטוף'} בנייר VENIA עם סרט זהב, צמוד ל${BCAT.packs[P.pack].name}.`;
-    if(P.pack==='bag')return P.chosen.length?'הכול עדיין נכנס בשקית הממותגת.':'שקית ממותגת, דף ברכה עם הלוגו שלכם ושוקולד.';
+    if(P.pack==='bag')return P.chosen.length?'הכול עדיין נכנס בשקית הממותגת.':'שקית ממותגת, דף ברכה עם הלוגו שלכם, שוקולד ותבנית סיליקון לדונאטס.';
     if(P.pack==='med')return `המתנות כבר לא נכנסות בשקית, אז המארז עבר לקופסה בינונית עם נייר משי (תוספת ₪${BCAT.packs.med.price}).`;
     return `הקופסה הבינונית קטנה מדי, אז המארז עבר לקופסה הגדולה (תוספת ₪${BCAT.packs.lrg.price}).`;
   }
@@ -2053,7 +2054,7 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
     const dp=discPct(n),dAmt=Math.round(sub*dp/100),nextD=VOLUME_DISCOUNTS.find(d=>d.min>n);
     const dTiers=`<span class="dt-h">הנחות כמות:</span>`+VOLUME_DISCOUNTS.map(d=>`<span class="dt${dp===d.pct?' on':''}"><span>מ־${d.min} מארזים</span><b>${d.pct}% הנחה</b></span>`).join('');
     const pk=BCAT.packs[P.pack];
-    const lines=[[`בסיס: שקית, דף ברכה, ${P.choc.name}`,bBase(P.choc)],...(P.boxAdd?[[`מעבר ל${pk.name}`,P.boxAdd]]:[]),
+    const lines=[[`בסיס: שקית, דף ברכה, תבנית סיליקון, ${P.choc.name}`,bBase(P.choc)],...(P.boxAdd?[[`מעבר ל${pk.name}`,P.boxAdd]]:[]),
       ...P.counts.map(i=>[`${i.name}${i.q>1?' ×'+i.q:''}`,i.price*i.q]),...(P.separate.length?[[`עטיפה נפרדת ×${P.separate.length}`,P.separate.length*BCAT.wrap]]:[])];
     q('#bldSum').innerHTML=`<h2>סיכום המארז</h2>
       <div class="bs-lines">${lines.map(([t,v])=>`<div class="bs-line"><span>${esc(t)}</span><span>${nis(v)}</span></div>`).join('')}</div>
