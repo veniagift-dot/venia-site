@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="VENIA – מתנות יוקרה לעובדים בכשרות מהודרת. בונים מארז מתנה לחג או לאירוע: שוקולד משובח, מתנות לבחירה וכרטיס ברכה עם הלוגו שלכם. משלוח לכל הארץ.">
+<meta name="description" content="VENIA – מארזי הוקרה לעובדים בכשרות מהודרת. בונים מארז לחג או לאירוע: שוקולד משובח, מתנות לבחירה ודף ברכה עם הלוגו שלכם. משלוח לכל הארץ.">
 <style>img{max-width:100%}body{margin:0}</style>
 <script>window.VENIA_ORDERS="netlify";
 // התראות וואטסאפ: אחרי ההפעלה ב-CallMeBot מדביקים כאן את המפתח (apikey)
 window.VENIA_NOTIFY={phone:"+972535910605",apikey:""};</script>
-<title>VENIA | מתנות יוקרה לעובדים בכשרות מהודרת</title>
+<title>VENIA | מארזי הוקרה לעובדים בכשרות מהודרת</title>
 <link rel="canonical" href="https://venia-gifts.netlify.app/">
 <meta property="og:type" content="website"><meta property="og:locale" content="he_IL">
-<meta property="og:title" content="VENIA | מתנות יוקרה לעובדים בכשרות מהודרת">
+<meta property="og:title" content="VENIA | מארזי הוקרה לעובדים בכשרות מהודרת">
 <meta property="og:description" content="מארזי מתנה לעובדים לחגים ולאירועים, בכשרות מהודרת ובאריזה מכובדת. בונים מארז ורואים מחיר מיד.">
 <meta property="og:url" content="https://venia-gifts.netlify.app/"><meta property="og:image" content="https://venia-gifts.netlify.app/img/pralines-12.jpg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"VENIA","description":"מתנות יוקרה לעובדים בכשרות מהודרת","url":"https://venia-gifts.netlify.app/","telephone":"+972-54-853-5975","email":"Veniagift@gmail.com","areaServed":"IL","openingHours":"Su-Th 09:30-15:30"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"VENIA","description":"מארזי הוקרה לעובדים בכשרות מהודרת","url":"https://venia-gifts.netlify.app/","telephone":"+972-54-853-5975","email":"Veniagift@gmail.com","areaServed":"IL","openingHours":"Su-Th 09:30-15:30"}</script>
 
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2160,7 +2160,7 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
       <div class="bs-total"><span>מחיר למארז</span><b>${nis(P.unit)}</b></div>
       <div class="bs-qty"><span>כמה מארזים?</span><span class="bld-qty"><button type="button" id="bldMinus" aria-label="פחות">−</button><input id="bldQ" type="number" inputmode="numeric" min="1" value="${n}" aria-label="כמות מארזים"><button type="button" id="bldPlus" aria-label="עוד">+</button></span></div>
       <div class="bs-disc">${dTiers}</div>
-      <div class="bs-calc"><div><span>${n} מארזים × ${nis(P.unit)}</span><span>${nis(sub)}</span></div>${dp?`<div class="dsc"><span>הנחת כמות ${dp}%</span><span>−${nis(dAmt)}</span></div>`:''}<div class="tot"><span>סה״כ</span><b>${nis(sub-dAmt)}</b></div>${nextD?`<p>עוד ${nextD.min-n} מארזים ותקבלו הנחה של ${nextD.pct}%</p>`:''}</div>
+      <div class="bs-calc"><div><span>${n} מארזים × ${nis(P.unit)}</span><span>${nis(sub)}</span></div>${dp?`<div class="dsc"><span>הנחת כמות ${dp}%</span><span>−${nis(dAmt)}</span></div>`:''}<div class="tot"><span>סה״כ</span><b>${nis(sub-dAmt)}</b></div>${nextD?`<p>עוד ${nextD.min-n===1?"מארז אחד":(nextD.min-n)+" מארזים"} ותקבלו הנחה של ${nextD.pct}%</p>`:''}</div>
       <button type="button" class="add bs-add" id="bldAdd">הוספה לסל</button>
       <p class="bs-ok" id="bldAdded" hidden>נוסף לסל. <button type="button" class="linkish" id="bldGoCart">מעבר לסל ולהזמנה</button></p>
       <p class="bs-note">אחרי ההזמנה נבדוק מלאי ונשלח לכם הדמיה עם הלוגו לאישור. הנחות כמות מחושבות בסל.</p>
