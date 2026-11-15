@@ -682,6 +682,9 @@ input::placeholder,textarea::placeholder{color:#8a90a0;-webkit-text-fill-color:#
 .bld-tabs button{border:1px solid var(--line);background:var(--navy-2);color:var(--muted);border-radius:999px;padding:7px 16px;font-size:14px}
 .bld-tabs button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
 .bld-tabs button[disabled]{opacity:.55;cursor:default}
+.bld-tools{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:0 0 14px;font-size:14px;color:var(--muted)}
+.bld-tools label{display:flex;align-items:center;gap:8px}
+.bld-tools select{font:inherit;font-size:14px;color:var(--ink);background:#fff;border:1px solid rgba(20,29,51,.18);border-radius:10px;padding:8px 10px}
 .bld-cats{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;margin-bottom:6px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
 .bc-chip{flex:none;border:1px solid rgba(20,29,51,.18);background:#fff;color:var(--ink);border-radius:999px;padding:9px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
 .bc-chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -1084,6 +1087,10 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
         <section class="bld-step" aria-labelledby="bs3">
           <div class="st-hd"><span class="bld-n">2</span><div><h2 id="bs3">מוסיפים מתנות</h2><p>בוחרים קטגוריה ומוסיפים מתנות. כל מתנה בתוספת תשלום. כשהמתנות כבר לא נכנסות בשקית הקטנה, המארז עובר אוטומטית לשקית בינונית או גדולה.</p></div></div>
           <div class="bld-cats" id="bldCats" role="tablist" aria-label="קטגוריות מתנות"></div>
+          <div class="bld-tools" id="bldTools">
+            <label>מיון <select id="bldSort"><option value="pa">מחיר: מהנמוך לגבוה</option><option value="pd">מחיר: מהגבוה לנמוך</option><option value="nm">לפי שם</option></select></label>
+            <label>סינון לפי מחיר <select id="bldPrice"><option value="all">כל המחירים</option><option value="0-50">עד ₪50</option><option value="50-100">₪50–100</option><option value="100-9999">מעל ₪100</option></select></label>
+          </div>
           <div class="bld-items" id="bldItems"></div>
           <p class="bld-disc-note">התמונות להמחשה בלבד.</p>
         </section>
@@ -1493,7 +1500,7 @@ var BCAT={
   cap:{bag:8,med:15,lrg:30},          // נקודות: כמה נכנס בכל אריזה
   bag:38,                              // שקית + כרטיס ברכה + תבנית סיליקון. בסיס עם 2 פרלינים = 38+17 = ₪55
   base:{name:'תבנית סיליקון לדונאטס',img:'img/item-mold.jpg',pts:3},
-  packs:{bag:{name:'שקית קטנה',price:0},med:{name:'שקית בינונית',price:52},lrg:{name:'שקית גדולה',price:90}}, // TODO: לעדכן מחירי שקיות
+  packs:{bag:{name:'שקית קטנה',price:0},med:{name:'שקית בינונית',price:5},lrg:{name:'שקית גדולה',price:10}}, // מחירים זמניים – לעדכן
   cats:[{id:'cryst',name:'חנוכיות קריסטל'},{id:'metal',name:'חנוכיות מתכת'},{id:'silver',name:'חנוכיות כסף'},{id:'dreidel',name:'סביבונים'},{id:'elec',name:'מכשירי חשמל'},{id:'oil',name:'שמן זית ופתילות'},{id:'bake',name:'אפייה ובישול'},{id:'serve',name:'כלי הגשה ואירוח'},{id:'wine',name:'יין ומשקאות'},{id:'coffee',name:'קפה ותה'}],
   wrap:10,
   choc:[ // מחיר הבסיס = שקית + דף ברכה + השוקולד
@@ -1511,7 +1518,15 @@ var BCAT={
       {id:'dre',cat:'dreidel',name:'שלישיית סביבוני עץ',img:'img/item-dreidels.jpg',price:7,pts:1},
       {id:'cut',cat:'bake',name:'סט חותכני עוגיות לחנוכה',img:'img/item-cutters.jpg',price:34,pts:2},
       {id:'men',cat:'cryst',name:'חנוכיית זכוכית',img:'img/up-menorah.jpg',price:35,pts:15},
-      {id:'menL',cat:'cryst',name:'חנוכיית זכוכית גדולה',img:'img/up-menorah-large.jpg',price:80,pts:30}],
+      {id:'menL',cat:'cryst',name:'חנוכיית זכוכית גדולה',img:'img/up-menorah-large.jpg',price:80,pts:30},
+      {id:'cr1',cat:'cryst',name:'חנוכיית קריסטל בסיס מדורג',img:'',price:120,pts:20},
+      {id:'cr2',cat:'cryst',name:'חנוכיית קריסטל גדולה',img:'',price:120,pts:30},
+      {id:'cr3',cat:'cryst',name:'חנוכיית קריסטל דגם עגול',img:'',price:95,pts:15},
+      {id:'cr4',cat:'cryst',name:'חנוכיית קריסטל דגם קטר',img:'',price:95,pts:20},
+      {id:'cr5',cat:'cryst',name:'חנוכיית קריסטל משושה',img:'',price:100,pts:15},
+      {id:'cr6',cat:'cryst',name:'חנוכיית קריסטל צבעונית',img:'',price:50,pts:10},
+      {id:'cr7',cat:'cryst',name:'חנוכיית קריסטל פס',img:'',price:45,pts:10},
+      {id:'cr8',cat:'cryst',name:'חנוכיית קריסטל כסף',img:'',price:46,pts:10}],
     general:[
       {id:'bat',cat:'bake',name:'כוס מדידה וזילוף לבלילה',img:'img/up-batter.jpg',price:50,pts:10},
       {id:'pan',cat:'bake',name:'מחבת פנקייק',img:'img/up-pancake-pan.jpg',price:65,pts:30,big:true,from:true},
@@ -2052,9 +2067,12 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
     const catsWith=BCAT.cats.map(c=>({...c,n:items.filter(i=>i.cat===c.id).length}));
     if(!B.cat)B.cat='all';
     q('#bldCats').innerHTML=`<button type="button" class="bc-chip" data-bcat="all" aria-pressed="${B.cat==='all'}">הכול</button>`+catsWith.map(c=>`<button type="button" class="bc-chip${c.n?'':' empty'}" data-bcat="${c.id}" aria-pressed="${B.cat===c.id}">${c.name}</button>`).join('');
-    const shown=items.filter(i=>B.cat==='all'||i.cat===B.cat);
-    q('#bldItems').innerHTML=shown.length?'':`<p class="bld-soon">המוצרים בקטגוריה הזו יתווספו בקרוב. רוצים משהו מסוים? <a href="https://wa.me/972535910605" target="_blank" rel="noopener">כתבו לנו בוואטסאפ</a></p>`;
-    if(shown.length)q('#bldItems').innerHTML=shown.slice().sort((a,b)=>a.price-b.price).map(i=>{const n=B.q[i.id]||0;const bars=Math.min(6,Math.ceil(i.pts/2));
+    const pr=(B.price||'all').split('-').map(Number);
+    let shown=items.filter(i=>(B.cat==='all'||i.cat===B.cat)&&(!B.price||B.price==='all'||(i.price>pr[0]&&i.price<=pr[1])));
+    const so=B.sort||'pa';shown=shown.slice().sort(so==='pd'?(a,b)=>b.price-a.price:so==='nm'?(a,b)=>a.name.localeCompare(b.name,'he'):(a,b)=>a.price-b.price);
+    q('#bldSort').value=so;q('#bldPrice').value=B.price||'all';
+    q('#bldItems').innerHTML=shown.length?'':(B.price&&B.price!=='all'&&items.some(i=>B.cat==='all'||i.cat===B.cat))?'<p class="bld-soon">אין מוצרים בטווח המחירים הזה. נסו טווח אחר.</p>':`<p class="bld-soon">המוצרים בקטגוריה הזו יתווספו בקרוב. רוצים משהו מסוים? <a href="https://wa.me/972535910605" target="_blank" rel="noopener">כתבו לנו בוואטסאפ</a></p>`;
+    if(shown.length)q('#bldItems').innerHTML=shown.map(i=>{const n=B.q[i.id]||0;const bars=Math.min(6,Math.ceil(i.pts/2));
       return `<div class="bld-item${n?' on':''}"><div class="bi-img">${i.img?`<img src="${i.img}" alt="">`:'<span class="bi-ph" aria-hidden="true">✦</span>'}</div>
         <b>${esc(i.name)}</b>
         <div class="bi-row"><span class="bi-price">+ ${i.from?'החל מ־':''}${nis(i.price)}</span><span class="stp"><button type="button" data-bdec="${i.id}" aria-label="פחות ${esc(i.name)}">−</button><output>${n}</output><button type="button" data-binc="${i.id}" aria-label="עוד ${esc(i.name)}">+</button></span></div></div>`}).join('');
@@ -2115,7 +2133,7 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
     if(e.target.closest('#bldGoCart')){openCart(true);return}
     if(e.target.closest('#bldBarGo')){e.preventDefault();q('#bldSum').scrollIntoView({behavior:'smooth',block:'start'});return}
   });
-  document.addEventListener('change',e=>{if(e.target.id==='bldQ'){B.n=Math.max(1,parseInt(e.target.value)||1);render()}});
+  document.addEventListener('change',e=>{if(e.target.id==='bldQ'){B.n=Math.max(1,parseInt(e.target.value)||1);render()}if(e.target.id==='bldSort'){B.sort=e.target.value;render()}if(e.target.id==='bldPrice'){B.price=e.target.value;render()}});
   if(document.body.dataset.view==='build'&&typeof route==='function')route();
 })();
 </script>
