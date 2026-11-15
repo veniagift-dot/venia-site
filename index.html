@@ -1027,6 +1027,18 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
 .a11y-doc-box ul{padding-inline-start:20px;margin:6px 0}
 .a11y-doc-box .a11y-x{position:absolute;left:12px;top:10px}
 @media (max-width:520px){.a11y-btn{width:48px;height:48px;bottom:calc(84px + env(safe-area-inset-bottom,0px))}.a11y-panel{bottom:calc(140px + env(safe-area-inset-bottom,0px))}}
+[data-bzoom]{cursor:zoom-in}
+.bzoom{position:fixed;inset:0;z-index:120;background:rgba(20,29,51,.18);display:flex;align-items:center;justify-content:center;padding:20px;animation:popIn .2s}
+.bzoom[hidden]{display:none}
+.bz-card{position:relative;background:#fff;border-radius:18px;padding:16px;max-width:min(520px,100%);width:100%;display:flex;flex-direction:column;gap:10px;box-shadow:0 24px 70px rgba(20,29,51,.35),0 0 0 1px rgba(20,29,51,.06)}
+.bz-card img{width:100%;max-height:58vh;object-fit:contain;border-radius:12px;background:#fff}
+.bz-card b{font-size:18px;color:var(--ink)}
+.bz-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.bz-price{color:#8a6a2e;font-weight:700;font-size:18px;display:flex;flex-direction:column;line-height:1.1}.bz-price small{font-size:12px;color:var(--muted);font-weight:500}.bz-price.soon{font-size:14px;color:var(--muted);font-weight:500}
+.bz-stp{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;overflow:hidden;direction:ltr}.bz-stp button{border:0;background:var(--navy);color:var(--ink);cursor:pointer}.bz-stp output{text-align:center;font-weight:700}
+.bz-stp button{width:36px!important;height:36px!important;font-size:20px!important}.bz-stp output{min-width:26px!important;font-size:17px!important}
+.bz-add{width:100%}
+.bz-x{position:absolute;top:10px;left:10px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.92);box-shadow:0 2px 6px rgba(20,29,51,.15);font-size:24px;line-height:1;cursor:pointer;color:var(--ink);z-index:2}
 </style>
 
 </head><body><svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1134,7 +1146,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
         </section>
 
         <section class="bld-step" aria-labelledby="bs3">
-          <div class="st-hd"><span class="bld-n">2</span><div><h2 id="bs3">מוסיפים מתנות</h2><p>נכנסים לקטגוריה ומוסיפים מתנות. כל מתנה בתוספת תשלום. כשהמתנות כבר לא נכנסות בשקית הקטנה, המארז עובר אוטומטית לשקית בינונית או גדולה.</p></div></div>
+          <div class="st-hd"><span class="bld-n">2</span><div><h2 id="bs3">מוסיפים מתנות</h2><p>נכנסים לקטגוריה ומוסיפים מתנות. כל מתנה בתוספת תשלום. המתנות שבחרתם מופיעות ליד השקית.</p></div></div>
           <div class="bld-cats" id="bldCats" role="tablist" aria-label="קטגוריות מתנות"></div>
           <div class="bld-tools" id="bldTools">
             <label class="tool-ic" title="מיון"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M7 20l-3-3M7 20l3-3"/><path d="M17 20V4M17 4l-3 3M17 4l3 3"/></svg><select id="bldSort" aria-label="מיון"><option value="pa">מחיר: מהנמוך לגבוה</option><option value="pd">מחיר: מהגבוה לנמוך</option><option value="nm">לפי שם</option></select></label>
@@ -1332,7 +1344,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
     <details><summary>אפשר לשלוח את המארזים ישירות לבית כל עובד?</summary><p>כן. בסיום ההזמנה בוחרים "משלוח לבית כל עובד", ואנחנו ניצור קשר כדי לקבל את רשימת הכתובות.</p></details>
     <details><summary>כמה זמן לוקח המשלוח?</summary><p>אנחנו שולחים לכל הארץ. זמן האספקה נקבע לפי אזור המשלוח, ויש גם אפשרות למשלוח מהיר או אקספרס. נתאם איתכם את המועד המדויק אחרי ההזמנה.</p></details>
     <details><summary>מקבלים חשבונית מס?</summary><p>כן. בסיום ההזמנה רושמים את שם העסק לחשבונית.</p></details>
-    <details><summary>איך בונים מארז?</summary><p>כל מארז מתחיל מהבסיס: שקית ממותגת, שוקולד, תבנית סיליקון לדונאטס ודף ברכה עם הלוגו שלכם. מחיר הבסיס נקבע לפי גודל השוקולד. מוסיפים מתנות לפי הטעם, וכשהן לא נכנסות בשקית הקטנה המארז עובר אוטומטית לשקית בינונית או גדולה. מוצר גדול במיוחד מגיע עטוף בנפרד, צמוד למארז.</p></details>
+    <details><summary>איך בונים מארז?</summary><p>כל מארז מתחיל מהבסיס: שקית ממותגת, שוקולד, תבנית סיליקון לדונאטס ודף ברכה עם הלוגו שלכם. מחיר הבסיס נקבע לפי גודל השוקולד. מוסיפים מתנות לפי הטעם, ואחרי ההזמנה נחזור אליכם לתאם את כל הפרטים.</p></details>
     
     <details><summary>אפשר להוסיף את הלוגו של החברה?</summary><p>כן. בכל מארז יש כרטיס ברכה עם הלוגו של החברה, בלי תוספת תשלום.</p></details>
     <details><summary>איך משלמים?</summary><p>אחרי שליחת ההזמנה ניצור איתכם קשר לסגירת הפרטים הסופיים. לאחר אישור סופי משלמים את מלוא סכום ההזמנה, מקבלים חשבונית, ואנחנו מתחילים בהכנת המארזים. אפשר לשלם בהעברה בנקאית או בביט.</p></details>
@@ -1548,7 +1560,7 @@ var BCAT={
   cap:{bag:8,med:15,lrg:30},          // נקודות: כמה נכנס בכל אריזה
   bag:38,                              // שקית + כרטיס ברכה + תבנית סיליקון. בסיס עם 2 פרלינים = 38+17 = ₪55
   base:{name:'תבנית סיליקון לדונאטס',img:'img/item-mold.jpg',pts:3},
-  packs:{bag:{name:'שקית קטנה',price:10},med:{name:'שקית בינונית',price:20},lrg:{name:'שקית גדולה',price:30}}, // מחירי שקיות (הקטנה כלולה בבסיס) – זמני
+  packs:{bag:{name:'שקית ממותגת',price:10},med:{name:'שקית בינונית',price:20},lrg:{name:'שקית גדולה',price:30}}, // מחירי שקיות (הקטנה כלולה בבסיס) – זמני
   cats:[{id:'men',name:'חנוכיות',img:'img/cr-large.webp'},{id:'oil',name:'שמן זית, פתילות וסביבונים',img:'img/item-dreidels.jpg'},{id:'elec',name:'מכשירי חשמל / אפייה',img:'img/waffle2.jpg'}],
   wrap:10,
   choc:[ // מחיר הבסיס = שקית + דף ברכה + השוקולד
@@ -1591,13 +1603,8 @@ function bPlan(hid,cid,qmap){
   const chosen=all.filter(i=>(qmap||{})[i.id]>0).flatMap(i=>Array.from({length:qmap[i.id]},()=>i));
   const basePts=(BCAT.base?BCAT.base.pts:0);
   const pts=choc.pts+basePts+chosen.reduce((a,i)=>a+i.pts,0);
-  const fit=p=>p<=cap.bag?'bag':p<=cap.med?'med':p<=cap.lrg?'lrg':null;
-  let inside=chosen.slice(),separate=[],pack=fit(pts),rest=pts;
-  if(!pack){
-    const order=inside.slice().sort((a,b)=>((b.big?100:0)+b.pts)-((a.big?100:0)+a.pts));
-    for(const o of order){if(rest<=cap.lrg)break;separate.push(o);inside.splice(inside.indexOf(o),1);rest-=o.pts}
-    pack=fit(rest)||'lrg';
-  }
+  // שקית אחת קבועה. גודל השקית ועטיפה נפרדת מתואמים מול הלקוח אחרי ההזמנה
+  let inside=chosen.slice(),separate=[],pack='bag';
   const inPts=choc.pts+basePts+inside.reduce((a,i)=>a+i.pts,0);
   const boxAdd=BCAT.packs[pack].price-BCAT.packs.bag.price;
   const unit=bBase(choc)+boxAdd+chosen.reduce((a,i)=>a+i.price,0)+separate.length*BCAT.wrap;
@@ -2096,13 +2103,14 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
     let html='';
     {const tiles=[`<span class="tl card">תודה!<em>VENIA</em></span>`,P.choc,BCAT.base,...P.inside].map(o=>typeof o==='string'?o:(o.img?`<span class="tl"><img src="${o.img}" alt=""></span>`:`<span class="tl ph">✦</span>`));
       const cols=Math.ceil(tiles.length/3),rows=Math.min(3,tiles.length);
-      html=`<div class="pk-wrap"><div class="pk-bagset"><div class="pk-bag-img sz-${P.pack}"><img src="img/bag-venia.webp" alt="שקית VENIA ממותגת" width="640" height="823"></div><div class="bs-items c${Math.min(cols,4)}" style="grid-template-rows:repeat(${rows},auto)">${tiles.join('')}</div></div><span class="pk-cap">${BCAT.packs[P.pack].name}</span></div>`;}
+      html=`<div class="pk-wrap"><div class="pk-bagset"><div class="pk-bag-img sz-${P.pack}"><img src="img/bag-venia.webp" alt="שקית VENIA ממותגת" width="640" height="823"></div><div class="bs-items c${Math.min(cols,4)}" style="grid-template-rows:repeat(${rows},auto)">${tiles.join('')}</div></div></div>`;}
     html+=P.separate.map(s=>`<span class="pk-plus" aria-hidden="true">+</span><div class="pk-wrap"><div class="pk-gift"><div class="g"></div><span class="bow"></span><span class="label">${s.img?`<img src="${s.img}" alt="">`:''}</span></div><span class="pk-cap">${esc(s.name)}<br>עטוף בנפרד</span></div>`).join('');
     return html;
   }
   function why(P){
     if(P.separate.length)return `הכול לא נכנס בשקית הגדולה, אז ${P.separate.map(s=>s.name).join(' ו')} ${P.separate.length>1?'יגיעו עטופים':'יגיע עטוף'} בנייר VENIA עם סרט זהב, צמוד ל${BCAT.packs[P.pack].name}.`;
-    if(P.pack==='bag')return P.chosen.length?'הכול עדיין נכנס בשקית הקטנה.':'שקית ממותגת, דף ברכה עם הלוגו שלכם, שוקולד ותבנית סיליקון לדונאטס.';
+    if(P.pack==='bag'){const base=['שקית ממותגת','דף ברכה עם הלוגו שלכם',P.choc.name,'תבנית סיליקון לדונאטס'],add=P.counts.map(i=>i.name+(i.q>1?` ×${i.q}`:'')),all=[...base,...add];
+      return 'במארז: '+all.slice(0,-1).join(', ')+' ו'+all[all.length-1]+'.'}
     if(P.pack==='med')return 'המתנות כבר לא נכנסות בשקית הקטנה, אז המארז עבר לשקית בינונית.';
     return 'השקית הבינונית קטנה מדי, אז המארז עבר לשקית הגדולה.';
   }
@@ -2131,7 +2139,7 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
       const so=B.sort||'pa';const pv=x=>x.price==null?1e9:x.price;shown=shown.slice().sort(so==='pd'?(a,b)=>(b.price==null?-1:b.price)-(a.price==null?-1:a.price):so==='nm'?(a,b)=>a.name.localeCompare(b.name,'he'):(a,b)=>pv(a)-pv(b));
       q('#bldSort').value=so;q('#bldPrice').value=B.price||'all';q('#bldFiltDot').hidden=!(B.price&&B.price!=='all');
       q('#bldItems').innerHTML=shown.length?shown.map(i=>{const n=B.q[i.id]||0;
-        return `<div class="bld-item${n?' on':''}"><div class="bi-img">${i.img?`<img src="${i.img}" alt="">`:'<span class="bi-ph" aria-hidden="true">✦</span>'}</div>
+        return `<div class="bld-item${n?' on':''}"><div class="bi-img"${i.img?` data-bzoom="${i.id}" role="button" tabindex="0" aria-label="הגדלת התמונה: ${esc(i.name)}"`:''}>${i.img?`<img src="${i.img}" alt="">`:'<span class="bi-ph" aria-hidden="true">✦</span>'}</div>
         <b>${esc(i.name)}</b>
         <div class="bi-row">${i.price==null?'<span class="bi-price soon">המחיר יעודכן בקרוב</span>':`<span class="bi-price">${i.from?'<small>החל מ־</small>':''}<span>${nis(i.price)}</span></span><span class="stp"><button type="button" data-bdec="${i.id}" aria-label="פחות ${esc(i.name)}">−</button><output>${n}</output><button type="button" data-binc="${i.id}" aria-label="עוד ${esc(i.name)}">+</button></span>`}</div></div>`}).join('')
         :(B.price&&B.price!=='all'&&cur.n)?'<p class="bld-soon">אין מוצרים בטווח המחירים הזה. נסו טווח אחר.</p>':`<p class="bld-soon">המוצרים בקטגוריה הזו יתווספו בקרוב. רוצים משהו מסוים? <a href="https://wa.me/972535910605" target="_blank" rel="noopener">כתבו לנו בוואטסאפ</a></p>`
@@ -2160,6 +2168,17 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
     q('#bldBarP').textContent=nis(P.unit);
     gcPrev();
   }
+  function zoom(it){let lb=q('#bZoom');if(!lb){lb=document.createElement('div');lb.id='bZoom';lb.className='bzoom';lb.setAttribute('role','dialog');document.body.appendChild(lb);
+      lb.addEventListener('click',e=>{const id=lb.dataset.id;
+        if(e.target.closest('.bz-inc')){B.q[id]=Math.min(9,(B.q[id]||0)+1);render();zoomFill();return}
+        if(e.target.closest('.bz-dec')){B.q[id]=Math.max(0,(B.q[id]||0)-1);render();zoomFill();return}
+        if(!e.target.closest('.bz-card')||e.target.closest('.bz-x,.bz-x2'))lb.hidden=true});
+      document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.hidden=true})}
+    lb.dataset.id=it.id;zoomFill();lb.setAttribute('aria-label',it.name);lb.hidden=false}
+  function zoomFill(){const lb=q('#bZoom'),it=bItems(B.h.id).find(x=>x.id===lb.dataset.id);if(!it)return;const n=B.q[it.id]||0;
+    lb.innerHTML=`<div class="bz-card"><button type="button" class="bz-x" aria-label="סגירה">×</button><img src="${it.img}" alt="${esc(it.name)}"><b>${esc(it.name)}</b>
+      <div class="bz-row">${it.price==null?'<span class="bz-price soon">המחיר יעודכן בקרוב</span>':`<span class="bz-price">${it.from?'<small>החל מ־</small>':''}${nis(it.price)}</span><span class="stp bz-stp"><button type="button" class="bz-inc" aria-label="עוד ${esc(it.name)}">+</button><output aria-live="polite">${n}</output><button type="button" class="bz-dec" aria-label="פחות ${esc(it.name)}">−</button></span>`}</div>
+      ${it.price==null?'':(n?`<button type="button" class="add bz-add bz-x2">✓ נוסף למארז · חזרה למוצרים</button>`:`<button type="button" class="add bz-add bz-inc">הוספה למארז</button>`)}</div>`}
   function gcPrev(){const g=B.gc;if(!q('#gcHol'))return;
     q('#gcHol').textContent=`${B.h?B.h.name:'חג'} שמח!`;
     q('#gcTextBox').hidden=g.mode!=='text';q('#gcFileBox').hidden=g.mode!=='file';
@@ -2183,6 +2202,7 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
     const g=e.target.closest('[data-bgrp]');if(g){B.group=g.dataset.bgrp;render();return}
     if(e.target.closest('[data-custom]')){const pp=q('#pop');if(pp){q('#popForm').hidden=false;q('#pDone').hidden=true;pp.hidden=false;q('#pName').focus()}return}
     const bc=e.target.closest('[data-bcat]');if(bc){B.cat=bc.dataset.bcat;B.price='all';render();const st=q('#bs3');if(st)st.closest('.bld-step').scrollIntoView({behavior:'smooth',block:'start'});return}
+    const z=e.target.closest('[data-bzoom]');if(z){const it=bItems(B.h.id).find(x=>x.id===z.dataset.bzoom);if(it)zoom(it);return}
     const i=e.target.closest('[data-binc]');if(i){B.q[i.dataset.binc]=Math.min(9,(B.q[i.dataset.binc]||0)+1);render();return}
     const d=e.target.closest('[data-bdec]');if(d){B.q[d.dataset.bdec]=Math.max(0,(B.q[d.dataset.bdec]||0)-1);render();return}
     if(e.target.closest('#bldMinus')){B.n=Math.max(1,B.n-1);render();return}
