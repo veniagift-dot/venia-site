@@ -864,9 +864,11 @@ input::placeholder,textarea::placeholder{color:#8a90a0;-webkit-text-fill-color:#
 .pk-bag-img{width:220px;flex:none;position:relative;z-index:1;filter:drop-shadow(0 16px 16px rgba(20,29,51,.2))}.pk-bag-img img{width:100%;height:auto;display:block}
 @media (max-width:560px){.pk-bag-img{width:150px}}
 .bs-side{display:flex;flex-wrap:wrap;gap:6px;align-items:flex-end;justify-content:center;position:relative;z-index:5;margin-bottom:-6px}
-.bs-items{max-width:190px;margin-right:-22px;gap:8px}
-.bs-items .tl.card{transform:rotate(-4deg)}.bs-items .tl:nth-child(2){transform:rotate(3deg)}
-@media (max-width:560px){.pk-bagset .pk-bag{width:150px;height:165px}.bs-items{max-width:130px}}
+.bs-items{display:grid;grid-auto-flow:column;gap:8px;align-items:end;align-content:end;position:relative;z-index:5;margin-right:-14px;margin-bottom:4px;--t:70px}
+.bs-items.c2{--t:60px}.bs-items.c3{--t:50px;gap:6px}.bs-items.c4{--t:42px;gap:5px}
+.bs-items .tl{width:var(--t);height:calc(var(--t)*.84)}
+.bs-items .tl.card{font-size:calc(var(--t)*.15)}.bs-items .tl.card em{font-size:calc(var(--t)*.12)}
+@media (max-width:560px){.pk-bagset .pk-bag{width:150px;height:165px}.bs-items{--t:60px}.bs-items.c2{--t:52px}.bs-items.c3{--t:44px}.bs-items.c4{--t:36px}}
 #drawer{z-index:80}#scrim{z-index:75}aside.cart{z-index:80}#cartScrim{z-index:75}
 @media (max-width:820px){.contact-grid{grid-template-columns:minmax(0,1fr)!important;gap:20px}}
 .contact-cards,.contact-form{min-width:0}.c-card{min-width:0}.c-card span{min-width:0}.c-card .mail{overflow-wrap:anywhere}
@@ -1183,8 +1185,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
         <div class="bld-sketch">
           <div class="bs-head"><h2>המארז שלכם</h2><span class="bs-pack" id="bldPack"></span></div>
           <div class="bld-stage" id="bldStage"></div>
-          <div class="bld-meter"><div class="bm-bar"><i id="bldFill"></i></div><div class="bm-lab"><span id="bldUsed"></span><span id="bldLeft"></span></div></div>
-          <p class="bld-why" id="bldWhy"></p>
+                    <p class="bld-why" id="bldWhy"></p>
         </div>
       </div>
     </div>
@@ -1256,7 +1257,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
         <select id="cGift"></select>
         <p class="c-note" id="cNote" hidden></p>
         <label for="cQty">מספר עובדים</label>
-        <div class="range-row"><input id="cQty" type="range" min="1" max="60" value="15"><output id="cQtyOut" for="cQty">15</output></div>
+        <div class="range-row"><input id="cQty" type="range" min="1" max="200" value="50"><output id="cQtyOut" for="cQty">50</output></div>
         <dl class="calc-sum">
           <div><dt>מחיר למארז</dt><dd id="cUnit">—</dd></div>
           <div><dt>כמות</dt><dd id="cQtyTxt">—</dd></div>
@@ -1567,7 +1568,6 @@ var BCAT={
       {id:'cdlx',cat:'oil',name:'נרות חנוכה דלוקס, 45 נרות',img:'img/candles-deluxe.webp',price:23,pts:2},
       {id:'sqz',cat:'oil',name:'בקבוק לחיץ לשמן זית, 500 מ"ל',img:'img/squeeze-bottle.webp',price:5,pts:2},
       {id:'dre',cat:'oil',name:'סביבונים',img:'img/item-dreidels.jpg',price:7,from:true,pts:1},
-      {id:'cut',cat:'elec',name:'חותכני עוגיות בצורות של חנוכה',img:'img/item-cutters.jpg',price:34,pts:2},
       {id:'cr1',cat:'men',name:'חנוכיית קריסטל בסיס מדורג',img:'img/cr-stepped.webp',price:120,pts:20},
       {id:'cr2',cat:'men',name:'חנוכיית קריסטל גדולה',img:'img/cr-large.webp',price:120,pts:30},
       {id:'cr3',cat:'men',name:'חנוכיית קריסטל דגם עגול',img:'img/cr-round.webp',price:95,pts:15},
@@ -1807,7 +1807,7 @@ const shek=n=>"₪"+n.toLocaleString("he-IL");
 function cartCount(){return CART.reduce((a,l)=>a+l.q,0)}
 function cartSubtotal(){return CART.reduce((a,l)=>a+l.q*lineInfo(l).unit,0)}
 // volume discount by total number of gifts — EXAMPLE values, update to the real ones
-const VOLUME_DISCOUNTS=[{min:10,pct:5},{min:25,pct:10},{min:50,pct:15}];
+const VOLUME_DISCOUNTS=[{min:50,pct:5},{min:100,pct:10}];
 function discPct(q){let p=0;VOLUME_DISCOUNTS.forEach(d=>{if(q>=d.min)p=d.pct});return p}
 function cartDiscount(){return Math.round(cartSubtotal()*discPct(cartCount())/100)}
 function cartTotal(){return cartSubtotal()-cartDiscount()}
@@ -2094,9 +2094,9 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
   const cardTile=k=>`<span class="tl card" style="width:${Math.round(44*k)}px;height:${Math.round(36*k)}px">תודה!<em>VENIA</em></span>`;
   function stage(P){
     let html='';
-    {const k=P.pack==='bag'?1:P.pack==='med'?(P.inPts>9?.85:.95):(P.inPts>15?.75:.85);
-      const side=[cardTile(1.4*k),tile(P.choc,1.05*k),tile(BCAT.base,k),...P.inside.map(i=>tile(i,k))].join('');
-      html=`<div class="pk-wrap"><div class="pk-bagset"><div class="pk-bag-img sz-${P.pack}"><img src="img/bag-venia.webp" alt="שקית VENIA ממותגת" width="640" height="823"></div><div class="bs-side bs-items">${side}</div></div><span class="pk-cap">${BCAT.packs[P.pack].name}</span></div>`;}
+    {const tiles=[`<span class="tl card">תודה!<em>VENIA</em></span>`,P.choc,BCAT.base,...P.inside].map(o=>typeof o==='string'?o:(o.img?`<span class="tl"><img src="${o.img}" alt=""></span>`:`<span class="tl ph">✦</span>`));
+      const cols=Math.ceil(tiles.length/3),rows=Math.min(3,tiles.length);
+      html=`<div class="pk-wrap"><div class="pk-bagset"><div class="pk-bag-img sz-${P.pack}"><img src="img/bag-venia.webp" alt="שקית VENIA ממותגת" width="640" height="823"></div><div class="bs-items c${Math.min(cols,4)}" style="grid-template-rows:repeat(${rows},auto)">${tiles.join('')}</div></div><span class="pk-cap">${BCAT.packs[P.pack].name}</span></div>`;}
     html+=P.separate.map(s=>`<span class="pk-plus" aria-hidden="true">+</span><div class="pk-wrap"><div class="pk-gift"><div class="g"></div><span class="bow"></span><span class="label">${s.img?`<img src="${s.img}" alt="">`:''}</span></div><span class="pk-cap">${esc(s.name)}<br>עטוף בנפרד</span></div>`).join('');
     return html;
   }
@@ -2140,9 +2140,6 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
     q('#bldStage').innerHTML=stage(P);
     const pct=Math.min(100,Math.round(P.inPts*100/P.cap));
     q('#bldPack').textContent=P.pack==='bag'?'':BCAT.packs[P.pack].name+(P.separate.length?' + עטיפה נפרדת':'');
-    q('#bldFill').style.width=pct+'%';
-    q('#bldUsed').textContent=pct>=100?'האריזה מלאה':`האריזה ${pct}% מלאה`;
-    q('#bldLeft').textContent=P.pack==='lrg'?'':`הבאה: ${P.pack==='bag'?'שקית בינונית':'שקית גדולה'}`;
     q('#bldWhy').textContent=why(P);
     const n=Math.max(1,parseInt(B.n)||1),sub=P.unit*n,vat=sub*VAT_RATE/100;
     const dp=discPct(n),dAmt=Math.round(sub*dp/100),nextD=VOLUME_DISCOUNTS.find(d=>d.min>n);
