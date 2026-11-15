@@ -1027,7 +1027,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
 .a11y-doc-box ul{padding-inline-start:20px;margin:6px 0}
 .a11y-doc-box .a11y-x{position:absolute;left:12px;top:10px}
 @media (max-width:520px){.a11y-btn{width:48px;height:48px;bottom:calc(84px + env(safe-area-inset-bottom,0px))}.a11y-panel{bottom:calc(140px + env(safe-area-inset-bottom,0px))}}
-[data-bzoom]{cursor:zoom-in}
+[data-bzoom],[data-bczoom]{cursor:zoom-in}
 .bzoom{position:fixed;inset:0;z-index:120;background:rgba(20,29,51,.18);display:flex;align-items:center;justify-content:center;padding:20px;animation:popIn .2s}
 .bzoom[hidden]{display:none}
 .bz-card{position:relative;background:#fff;border-radius:18px;padding:16px;max-width:min(520px,100%);width:100%;display:flex;flex-direction:column;gap:10px;box-shadow:0 24px 70px rgba(20,29,51,.35),0 0 0 1px rgba(20,29,51,.06)}
@@ -2121,7 +2121,7 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
     q('#bldCrumb').textContent=`מארזי ${h.name}`;
     q('#bldEyebrow').textContent=h.when;
     q('#bldH').textContent=`מארזי ${h.name}`;
-    q('#bldChocs').innerHTML=BCAT.choc.map(c=>`<button type="button" class="bld-choc" data-bchoc="${c.id}" aria-pressed="${B.choc===c.id}"><img src="${c.img}" alt=""><b>${c.name}</b><span>מארז ${c.from?'החל מ־':''}${nis(bBase(c))}</span></button>`).join('');
+    q('#bldChocs').innerHTML=BCAT.choc.map(c=>`<button type="button" class="bld-choc" data-bchoc="${c.id}" aria-pressed="${B.choc===c.id}"><img src="${c.img}" alt="" data-bczoom="${c.id}"><b>${c.name}</b><span>מארז ${c.from?'החל מ־':''}${nis(bBase(c))}</span></button>`).join('');
     const catsWith=BCAT.cats.map(c=>{const its=items.filter(i=>i.cat===c.id);const sel=its.reduce((a,i)=>a+(B.q[i.id]||0),0);return {...c,n:its.length,sel,img:c.img||(its.find(i=>i.img)||{}).img||''}});
     if(!B.cat)B.cat='all';
     const inCat=B.cat!=='all';
@@ -2170,12 +2170,18 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
   }
   function zoom(it){let lb=q('#bZoom');if(!lb){lb=document.createElement('div');lb.id='bZoom';lb.className='bzoom';lb.setAttribute('role','dialog');document.body.appendChild(lb);
       lb.addEventListener('click',e=>{const id=lb.dataset.id;
+        if(e.target.closest('.bz-pick')){B.choc=lb.dataset.choc;render();zoomFill();return}
         if(e.target.closest('.bz-inc')){B.q[id]=Math.min(9,(B.q[id]||0)+1);render();zoomFill();return}
         if(e.target.closest('.bz-dec')){B.q[id]=Math.max(0,(B.q[id]||0)-1);render();zoomFill();return}
         if(!e.target.closest('.bz-card')||e.target.closest('.bz-x,.bz-x2'))lb.hidden=true});
       document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.hidden=true})}
-    lb.dataset.id=it.id;zoomFill();lb.setAttribute('aria-label',it.name);lb.hidden=false}
-  function zoomFill(){const lb=q('#bZoom'),it=bItems(B.h.id).find(x=>x.id===lb.dataset.id);if(!it)return;const n=B.q[it.id]||0;
+    if(it.choc){lb.dataset.choc=it.choc;lb.dataset.id=''}else{lb.dataset.choc='';lb.dataset.id=it.id}zoomFill();lb.hidden=false}
+  function zoomFill(){const lb=q('#bZoom');
+    if(lb.dataset.choc){const c=BCAT.choc.find(x=>x.id===lb.dataset.choc);if(!c)return;const on=B.choc===c.id;
+      lb.innerHTML=`<div class="bz-card"><button type="button" class="bz-x" aria-label="סגירה">×</button><img src="${c.img}" alt="${esc(c.name)}"><b>${esc(c.name)}</b>
+      <div class="bz-row"><span class="bz-price"><small>מחיר המארז</small>${nis(bBase(c))}</span></div>
+      ${on?`<button type="button" class="add bz-add bz-x2">✓ נבחר · חזרה</button>`:`<button type="button" class="add bz-add bz-pick">בחירת השוקולד הזה</button>`}</div>`;return}
+    const it=bItems(B.h.id).find(x=>x.id===lb.dataset.id);if(!it)return;const n=B.q[it.id]||0;
     lb.innerHTML=`<div class="bz-card"><button type="button" class="bz-x" aria-label="סגירה">×</button><img src="${it.img}" alt="${esc(it.name)}"><b>${esc(it.name)}</b>
       <div class="bz-row">${it.price==null?'<span class="bz-price soon">המחיר יעודכן בקרוב</span>':`<span class="bz-price">${it.from?'<small>החל מ־</small>':''}${nis(it.price)}</span><span class="stp bz-stp"><button type="button" class="bz-inc" aria-label="עוד ${esc(it.name)}">+</button><output aria-live="polite">${n}</output><button type="button" class="bz-dec" aria-label="פחות ${esc(it.name)}">−</button></span>`}</div>
       ${it.price==null?'':(n?`<button type="button" class="add bz-add bz-x2">✓ נוסף למארז · חזרה למוצרים</button>`:`<button type="button" class="add bz-add bz-inc">הוספה למארז</button>`)}</div>`}
@@ -2198,6 +2204,7 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
   window.bldOpen=function(h){if(!B.h||B.h.id!==h.id){B.h=h;B.q={};B.choc='p2';B.group=null;B.cat='all'}render()};
   document.addEventListener('click',e=>{
     if(!e.target.closest('#buildPage'))return;
+    const cz=e.target.closest('[data-bczoom]');if(cz){B.choc=cz.dataset.bczoom;render();zoom({choc:B.choc});return}
     const c=e.target.closest('[data-bchoc]');if(c){B.choc=c.dataset.bchoc;render();return}
     const g=e.target.closest('[data-bgrp]');if(g){B.group=g.dataset.bgrp;render();return}
     if(e.target.closest('[data-custom]')){const pp=q('#pop');if(pp){q('#popForm').hidden=false;q('#pDone').hidden=true;pp.hidden=false;q('#pName').focus()}return}
