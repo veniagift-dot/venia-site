@@ -800,6 +800,8 @@ input::placeholder,textarea::placeholder{color:#8a90a0;-webkit-text-fill-color:#
 .pk-bagset .pk-bag{height:200px}
 .pk-bagset .pk-bag .front{inset:46px 0 0}
 .pk-bagset .pk-bag .handle{top:-4px}
+.pk-bag-img{width:220px;flex:none;position:relative;z-index:1;filter:drop-shadow(0 16px 16px rgba(20,29,51,.2))}.pk-bag-img img{width:100%;height:auto;display:block}
+@media (max-width:560px){.pk-bag-img{width:150px}}
 .bs-side{display:flex;flex-wrap:wrap;gap:6px;align-items:flex-end;justify-content:center;position:relative;z-index:5;margin-bottom:-6px}
 .bs-items{max-width:190px;margin-right:-22px;gap:8px}
 .bs-items .tl.card{transform:rotate(-4deg)}.bs-items .tl:nth-child(2){transform:rotate(3deg)}
@@ -2016,7 +2018,7 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
     let html='';
     if(P.pack==='bag'){
       const side=[cardTile(1.5),tile(P.choc,1.1),tile(BCAT.base,1),...P.inside.map(i=>tile(i,1))].join('');
-      html=`<div class="pk-wrap"><div class="pk-bagset"><div class="pk-bag"><span class="handle h1"></span><span class="handle h2"></span><div class="front"></div><span class="pk-word">VENIA</span><span class="pk-sub">מתנות יוקרה לעובדים</span></div><div class="bs-side bs-items">${side}</div></div></div>`;
+      html=`<div class="pk-wrap"><div class="pk-bagset"><div class="pk-bag-img"><img src="img/bag-venia.webp" alt="שקית VENIA ממותגת" width="640" height="823"></div><div class="bs-side bs-items">${side}</div></div></div>`;
     }else{
       const k=P.pack==='med'?(P.inPts>9?.8:1):(P.inPts>15?.78:.92);
       const tiles=[cardTile(1),tile(P.choc,k),tile(BCAT.base,k),...P.inside.map(i=>tile(i,k))].join('');
