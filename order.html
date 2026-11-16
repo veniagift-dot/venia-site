@@ -38,7 +38,19 @@ td ul{margin:6px 0 0;padding:0 16px 0 0;color:var(--muted);font-size:13.5px}
 #bad{max-width:520px;margin:60px auto;text-align:center;padding:0 16px}
 @media (max-width:560px){.sheet{margin:0;border-radius:0}.top,.body{padding:18px 16px}.cust{grid-template-columns:1fr}th.q,td.q{display:none}}
 @media print{body{background:#fff}.sheet{box-shadow:none;margin:0;max-width:none}.acts{display:none}.top{-webkit-print-color-adjust:exact;print-color-adjust:exact}.cust{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.label{display:none}
+@media print{body.lbl .sheet{display:none!important}body.lbl .label{display:flex}}
+.label{width:100%;min-height:138mm;margin:0;box-sizing:border-box;border:1.5px solid #141d33;border-radius:4mm;padding:5mm 6mm;flex-direction:column;gap:3mm;font-size:11.5pt;line-height:1.35;color:#141d33}
+.label .lh{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1.5px solid #141d33;padding-bottom:3mm}
+.label .lw{font-family:"Frank Ruhl Libre",Georgia,serif;letter-spacing:.35em;font-size:20pt;direction:ltr}
+.label .lh small{display:block;font-size:9pt;color:#7d5f26;letter-spacing:.04em}
+.label .lno{text-align:left;font-size:9pt}.label .lno b{display:block;font-size:17pt}
+.label dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:1.5mm 4mm}.label dt{color:#5d6577;font-size:10pt}.label dd{margin:0;font-weight:700}
+.label .lbox{border-top:1px dashed #999;padding-top:3mm}.label .lbox b{display:block;margin-bottom:1mm}
+.label ul{margin:0;padding:0 5mm 0 0;font-size:10.5pt}
+.label .lq{margin-top:auto;text-align:center;font-size:14pt;font-weight:800;border:1.5px solid #141d33;border-radius:3mm;padding:1.5mm}
 </style>
+<style id="pg"></style>
 </head>
 <body>
 <div class="sheet" id="page" hidden>
@@ -54,13 +66,15 @@ td ul{margin:6px 0 0;padding:0 16px 0 0;color:var(--muted);font-size:13.5px}
     <div class="tot" id="tot"></div>
     <div class="acts">
       <button type="button" class="pri" id="cp">העתקה לאפליקציה</button>
-      <button type="button" onclick="print()">הדפסה / שמירה כ־PDF</button>
+      <button type="button" id="prA4">הדפסה / שמירה כ־PDF</button>
+      <button type="button" id="prLbl">מדבקה לחבילה (בלי מחירים)</button>
       <a id="wa" target="_blank" rel="noopener">וואטסאפ ללקוח</a>
       <a id="tel">חיוג ללקוח</a>
     </div>
     <p class="foot">VENIA · 054-853-5975 · Veniagift@gmail.com</p>
   </div>
 </div>
+<div class="label" id="label"></div>
 <div id="bad" hidden><h1>הקישור לא תקין</h1><p>לא הצלחנו לקרוא את פרטי ההזמנה מהקישור. פרטי ההזמנה המלאים נמצאים גם בגוף המייל וב־Netlify.</p></div>
 <script>
 (function(){
@@ -81,6 +95,15 @@ td ul{margin:6px 0 0;padding:0 16px 0 0;color:var(--muted);font-size:13.5px}
   if(ph){$('#tel').href='tel:'+ph;$('#wa').href='https://wa.me/'+intl+'?text='+encodeURIComponent(`שלום ${D.n||''}, כאן VENIA. קיבלנו את ההזמנה שלך (מס׳ ${D.i}). `)}else{$('#tel').hidden=true;$('#wa').hidden=true}
   const txt=()=>`שלום, זה אישור ההזמנה שלי (מס׳ ${D.i}):\n`+D.l.map(x=>`• ${x[0]} | ${x[4]||'שקית ממותגת'} | כמות: ${x[1]} | ${nis(x[2])} ליחידה | ${nis(x[1]*x[2])}\n   ${(x[3]||[]).join('; ')}`).join('\n')+'\n'+(D.d?`הנחת כמות ${D.dp||''}%: −${nis(D.d)}\n`:'')+`סה״כ לתשלום: ${nis(D.t)}\n\nשם: ${D.n||''}\nטלפון: ${D.p||''}\nמייל: ${D.e||''}\nשם העסק לחשבונית: ${D.b||''}\nמשלוח: ${D.dl||''}`+(D.nt?`\nהערות: ${D.nt}`:'');
   $('#cp').onclick=async()=>{const b=$('#cp');try{await navigator.clipboard.writeText(txt());b.textContent='✓ הועתק. עכשיו מדביקים באפליקציה'}catch(e){const ta=document.createElement('textarea');ta.value=txt();document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();b.textContent='✓ הועתק'}setTimeout(()=>b.textContent='העתקה לאפליקציה',3500)};
+  const pcs=D.l.reduce((a,x)=>a+(+x[1]||0),0);
+  $('#label').innerHTML=`<div class="lh"><div><span class="lw">VENIA</span><small>וֶניה · מארזי הוקרה</small></div><div class="lno">הזמנה מס׳<b>${esc(D.i)}</b></div></div>
+    <dl>${D.b?`<dt>עסק</dt><dd>${esc(D.b)}</dd>`:''}${D.n?`<dt>איש קשר</dt><dd>${esc(D.n)}</dd>`:''}${D.p?`<dt>טלפון</dt><dd dir="ltr" style="text-align:right">${esc(D.p)}</dd>`:''}${D.dl?`<dt>משלוח</dt><dd>${esc(D.dl)}</dd>`:''}</dl>
+    ${D.l.map(x=>`<div class="lbox"><b>${esc(x[0])} · ${esc(x[1])} יח׳</b><ul>${(x[3]||[]).map(d=>`<li>${esc(d)}</li>`).join('')}</ul></div>`).join('')}
+    ${D.nt?`<div class="lbox"><b>הערות</b>${esc(D.nt)}</div>`:''}
+    <div class="lq">סה״כ ${pcs} מארזים</div>`;
+  $('#prA4').onclick=()=>{document.body.classList.remove('lbl');$('#pg').textContent='@page{size:A4;margin:10mm}';print()};
+  $('#prLbl').onclick=()=>{document.body.classList.add('lbl');$('#pg').textContent='@page{size:100mm 150mm;margin:3mm}';print()};
+  addEventListener('afterprint',()=>document.body.classList.remove('lbl'));
   $('#page').hidden=false;
 })();
 </script>
