@@ -9,6 +9,7 @@
 // התראות וואטסאפ: אחרי ההפעלה ב-CallMeBot מדביקים כאן את המפתח (apikey)
 window.VENIA_NOTIFY={phone:"+972535910605",apikey:""};</script>
 <title>VENIA | מארזי הוקרה לעובדים בכשרות מהודרת</title>
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#141d33">
 <link rel="canonical" href="https://venia-gifts.netlify.app/">
 <meta property="og:type" content="website"><meta property="og:locale" content="he_IL">
 <meta property="og:title" content="VENIA | מארזי הוקרה לעובדים בכשרות מהודרת">
@@ -1445,7 +1446,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
 <form name="lead" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="bot-field"><input name="subject"><input name="source"><input name="full_name"><input name="phone"><input name="email"></form>
 <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="bot-field"><input name="subject"><input name="full_name"><input name="phone"><input name="business"><textarea name="message"></textarea></form>
 <form name="order" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
-  <input name="bot-field"><input name="subject"><input name="full_name"><input name="phone"><input name="email"><input name="business"><input name="delivery"><input name="order_total"><input name="packages"><input name="discount"><textarea name="notes"></textarea><input name="order_id"><textarea name="summary"></textarea><textarea name="greeting"></textarea>
+  <input name="bot-field"><input name="subject"><input name="order_page"><input name="full_name"><input name="phone"><input name="email"><input name="business"><input name="delivery"><input name="order_total"><input name="packages"><input name="discount"><textarea name="notes"></textarea><input name="order_id"><textarea name="summary"></textarea><textarea name="greeting"></textarea>
   <input type="file" name="logo_file"><input type="file" name="card_file"><input type="file" name="logo_file_2"><input type="file" name="card_file_2"><input type="file" name="logo_file_3"><input type="file" name="card_file_3">
 </form>
 
@@ -1879,6 +1880,10 @@ function renderSwaps(){
 $("#swapToggle").onclick=()=>{const o=$("#swapPanel").hidden;$("#swapPanel").hidden=!o;$("#swapToggle").setAttribute("aria-expanded",o)};
 
 // checkout
+function orderPageUrl(id,f){try{const D={i:id,dt:new Date().toLocaleString("he-IL",{dateStyle:"short",timeStyle:"short"}),n:f.full_name,b:f.business,p:f.phone,e:f.email,dl:f.delivery,nt:f.notes,
+    l:CART.map(l=>{const L=lineInfo(l);return [L.title,l.q,L.unit,L.det,L.pack]}),s:cartSubtotal(),d:cartDiscount(),dp:discPct(cartCount()),t:cartGrand()};
+  const b=btoa(unescape(encodeURIComponent(JSON.stringify(D)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+  return "https://venia-gifts.netlify.app/order.html#"+b}catch(e){return ""}}
 function orderSummary(id,f){
   const lines=CART.map(l=>{const L=lineInfo(l);return `• ${L.title} | ${L.pack} | כמות: ${l.q} | ${shek(L.unit)} ליחידה | ${shek(l.q*L.unit)}\n   ${L.det.join("; ")}`});
   const dp=discPct(cartCount());return `שלום, זה אישור ההזמנה שלי (מס׳ ${id}):\n${lines.join("\n")}\n`+(dp?`הנחת כמות ${dp}%: −${shek(cartDiscount())}\n`:"")+(VAT_RATE?`סה״כ לפני מע״מ: ${shek(cartTotal())}\nמע״מ ${VAT_RATE}%: ${shek(cartVat())}\n`:"")+`סה״כ לתשלום: ${shek(cartGrand())}`+(CART.some(l=>l.g&&(l.g.logo||l.g.card))?`\n(את קובצי הלוגו/הכרטיס אשלח כאן בהודעה הבאה)`:"")+`\n\nשם: ${f.full_name}\nטלפון: ${f.phone}\nמייל: ${f.email}\nשם העסק לחשבונית: ${f.business}\nמשלוח: ${f.delivery}`+(f.notes?`\nהערות: ${f.notes}`:"");
@@ -1900,7 +1905,7 @@ $("#checkout").addEventListener("submit",async e=>{
     try{
       const total=cartGrand();
       const fd=new FormData();
-      Object.entries({"form-name":"order",subject:`הזמנה חדשה: ${f.full_name}${f.business?" · "+f.business:""} · ${shek(total)}`,full_name:f.full_name,phone:f.phone,email:f.email,business:f.business,delivery:f.delivery,order_total:total,packages:cartCount(),discount:cartDiscount(),notes:f.notes,order_id:id,summary,greeting:CART.map((l,k)=>`${k+1}. `+gcDet(l.g).join("; ")).join("\n")}).forEach(([k,v])=>fd.append(k,v));
+      Object.entries({"form-name":"order",subject:`הזמנה חדשה: ${f.full_name}${f.business?" · "+f.business:""} · ${shek(total)}`,order_page:orderPageUrl(id,f),full_name:f.full_name,phone:f.phone,email:f.email,business:f.business,delivery:f.delivery,order_total:total,packages:cartCount(),discount:cartDiscount(),notes:f.notes,order_id:id,summary,greeting:CART.map((l,k)=>`${k+1}. `+gcDet(l.g).join("; ")).join("\n")}).forEach(([k,v])=>fd.append(k,v));
       CART.slice(0,3).forEach((l,k)=>{const F=GFILES[lineKey(l)]||{},sx=k?"_"+(k+1):"";if(F.logo)fd.append("logo_file"+sx,F.logo);if(F.card)fd.append("card_file"+sx,F.card)});
       const r=await fetch("/",{method:"POST",body:fd});
       if(!r.ok)throw new Error(r.status);
