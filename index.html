@@ -9,7 +9,7 @@
 // התראות וואטסאפ: אחרי ההפעלה ב-CallMeBot מדביקים כאן את המפתח (apikey)
 window.VENIA_NOTIFY={phone:"+972535910605",apikey:""};</script>
 <title>VENIA | מארזי הוקרה לעובדים בכשרות מהודרת</title>
-<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#141d33">
+<script async src="https://www.googletagmanager.com/gtag/js?id=GTM-5GRMLW7D"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());</script><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#141d33">
 <link rel="canonical" href="https://venia-gifts.netlify.app/">
 <meta property="og:type" content="website"><meta property="og:locale" content="he_IL">
 <meta property="og:title" content="VENIA | מארזי הוקרה לעובדים בכשרות מהודרת">
@@ -1511,7 +1511,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
     <nav class="foot-col" aria-label="ניווט תחתון"><b>ניווט</b><a href="#" data-nav="home">דף הבית</a><a href="#gifts" data-nav="gifts">מתנות לחגים</a><a href="#about" data-nav="about">אודות</a><a href="#faq" data-nav="faq">שאלות נפוצות</a><a href="#contact" data-nav="contact">צור קשר</a></nav>
     <div class="foot-col"><b>צור קשר</b><a dir="ltr" class="num" href="tel:+972548535975">054-853-5975</a><a dir="ltr" class="mail" href="mailto:Veniagift@gmail.com">Veniagift@gmail.com</a><a href="https://wa.me/972535910605" target="_blank" rel="noopener">וואטסאפ לתיאום אישי</a></div>
   </div>
-  <div class="wrap foot-bottom"><span>© 2026 VENIA</span><span>כל הזכויות שמורות</span><span>התמונות להמחשה בלבד. ט.ל.ח.</span><button type="button" class="linkish" data-a11y-doc>הצהרת נגישות</button></div>
+  <div class="wrap foot-bottom"><span>© 2026 VENIA</span><span>כל הזכויות שמורות</span><span>התמונות להמחשה בלבד. ט.ל.ח.</span><span>האתר משתמש ב־Google Analytics למדידה סטטיסטית אנונימית של השימוש באתר.</span><button type="button" class="linkish" data-a11y-doc>הצהרת נגישות</button></div>
 </footer>
 
 <script>
@@ -1822,6 +1822,21 @@ function cartTotal(){return cartSubtotal()-cartDiscount()}
 function cartVat(){return Math.round(cartTotal()*VAT_RATE)/100}
 function cartGrand(){return cartTotal()+cartVat()}
 function updateBadge(bump){$("#cartCount").textContent=cartCount();if(bump){const b=$("#cartBtn");b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump")}}
+function track(n,p){try{if(typeof gtag==="function")gtag("event",n,p||{})}catch(e){}}
+document.addEventListener("click",e=>{const a=e.target.closest("a[href],[data-bcat],[data-custom],#bldAdd,#cartBtn,#submitBtn,[data-bchoc],[data-bczoom],[data-bzoom],[data-binc]");if(!a)return;const h=a.getAttribute("href")||"";
+  if(h.includes("wa.me"))track("click_whatsapp",{place:a.className||a.id||""});
+  else if(h.startsWith("tel:"))track("click_phone");
+  else if(h.startsWith("mailto:"))track("click_email");
+  else if(a.dataset.bcat&&a.dataset.bcat!=="all")track("select_category",{category:a.dataset.bcat});
+  else if(a.dataset.custom!==undefined)track("open_custom_request");
+  else if(a.dataset.bchoc)track("select_chocolate",{chocolate:a.dataset.bchoc});
+  else if(a.dataset.bczoom||a.dataset.bzoom)track("zoom_product",{item:a.dataset.bczoom||a.dataset.bzoom});
+  else if(a.dataset.binc)track("add_gift",{item:a.dataset.binc});
+  else if(a.id==="bldAdd")track("add_to_cart",{currency:"ILS"});
+  else if(a.id==="cartBtn")track("view_cart");
+  else if(a.id==="submitBtn")track("begin_checkout");
+},true);
+addEventListener("hashchange",()=>{const s=location.hash.slice(1);if(s)track("view_section",{section:s})});
 function addToCart(h,t,i,q,sw,ad){sw=(sw||[]).map((x,k)=>chosen(sw,k).slice().sort((a,b)=>a-b));if(!sw.some(x=>x.length))sw=[];ad=(ad||[]).slice().sort();const key=JSON.stringify([sw,ad]);const l=CART.find(x=>x.h===h&&x.t===t&&x.i===i&&JSON.stringify([x.s||[],x.a||[]])===key);if(l)l.q+=q;else CART.push({h,t,i,q,s:sw,a:ad});saveCart();updateBadge(true);renderCart()}
 function clampQ(v){v=parseInt(v,10);return isNaN(v)||v<1?1:Math.min(v,9999)}
 function renderCart(){
@@ -1920,6 +1935,7 @@ $("#checkout").addEventListener("submit",async e=>{
     $("#doneText").textContent=`מספר הזמנה: ${id}. כדי לסיים, שלחו לנו את ההזמנה בוואטסאפ.`;
   }
   $("#doneWa").href=waHref;$("#doneWaBox").hidden=false;
+  track("purchase",{transaction_id:String(id),value:Math.round(cartGrand()),currency:"ILS",items:CART.map(l=>{const L=lineInfo(l);return {item_name:L.title,price:L.unit,quantity:l.q}})});
   CART=[];saveCart();updateBadge();$("#fNotes").value="";
   $("#cartMain").hidden=true;$("#cartDone").hidden=false;
 });
@@ -1960,7 +1976,7 @@ $("#contactForm").addEventListener("submit",async e=>{e.preventDefault();
   $("#kErr").hidden=true;const txt=`שלום, אשמח שתחזרו אליי.\nשם: ${f.full_name}\nטלפון: ${f.phone}`+(f.business?`\nעסק: ${f.business}`:"")+(f.message?`\n${f.message}`:"");
   const wa="https://wa.me/972535910605?text="+encodeURIComponent(txt);
   if(ORDER_MODE==="netlify"){try{const r=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams({"form-name":"contact",subject:`פנייה חדשה: ${f.full_name} · ${f.phone}`,...f}).toString()});if(!r.ok)throw 0;notifyOwner("פנייה חדשה באתר VENIA\n"+txt);
-      $("#kDone").textContent="תודה! הפרטים התקבלו ונחזור אליכם בהקדם.";}
+      $("#kDone").textContent="תודה! הפרטים התקבלו ונחזור אליכם בהקדם.";track("generate_lead",{form:"contact"});}
     catch(x){$("#kDone").innerHTML=`הפרטים לא נשלחו בגלל תקלה בחיבור. <a href="${wa}" target="_blank" rel="noopener">שלחו אותם בוואטסאפ</a>.`}}
   else $("#kDone").innerHTML=`כמעט סיימנו. <a href="${wa}" target="_blank" rel="noopener">לחצו כאן לשליחת הפרטים בוואטסאפ</a>.`;
   $("#kDone").hidden=false;});
@@ -2008,7 +2024,7 @@ $("#leadForm").addEventListener("submit",async e=>{e.preventDefault();
     $("#pErr").hidden=true;const txt=`שלום, אשמח לקבל הצעה לאריזות מתנה בהתאמה אישית.\nשם: ${f.full_name}\nטלפון: ${f.phone}`+(f.email?`\nמייל: ${f.email}`:"");
     if(ORDER_MODE==="netlify"){try{const r=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams({"form-name":"lead",subject:`פנייה להתאמה אישית: ${f.full_name} · ${f.phone}`,source:"חלון התאמה אישית",...f}).toString()});if(!r.ok)throw 0;notifyOwner("פנייה חדשה באתר VENIA\n"+txt)}
       catch(x){$("#pErr").textContent="השליחה לא הצליחה. נסו שוב, או שלחו לנו הודעה בוואטסאפ.";$("#pErr").hidden=false;return}}
-    $("#popForm").hidden=true;$("#pDone").hidden=false;mark("sent");setTimeout(()=>{pop.hidden=true},3500)});
+    $("#popForm").hidden=true;$("#pDone").hidden=false;mark("sent");track("generate_lead",{form:"custom_request"});setTimeout(()=>{pop.hidden=true},3500)});
 })();
 
 // ---------- countdown strip
