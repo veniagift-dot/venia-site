@@ -695,6 +695,13 @@ input::placeholder,textarea::placeholder{color:#8a90a0;-webkit-text-fill-color:#
 .bld-catrow{display:flex;align-items:center;gap:16px;width:100%;font:inherit;text-align:right;color:inherit;background:var(--navy-2);border:1.5px solid var(--line);border-radius:16px;padding:10px 10px 10px 18px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
 .bld-catrow:hover{border-color:var(--gold);box-shadow:0 8px 22px rgba(20,29,51,.08)}
 .bld-catrow.on{border-color:var(--gold)}
+.bld-acc{margin:-11px 0 4px;padding:14px 12px 10px;border:1.5px solid var(--gold);border-top:0;border-radius:0 0 16px 16px;background:#fff}
+.bld-catrow.open{border-color:var(--gold);border-bottom-color:var(--line);border-radius:16px 16px 0 0;box-shadow:none}
+.bld-catrow .cr-arrow svg{transition:transform .2s}
+.bld-catrow.open .cr-arrow svg{transform:rotate(-90deg)}
+.bld-acc #bldTools{margin:0 0 12px}
+.bld-acc-close{display:block;margin:12px auto 0;font:inherit;font-size:14px;color:var(--muted);background:none;border:0;text-decoration:underline;cursor:pointer;padding:6px}
+
 .cr-img{flex:none;width:96px;height:96px;border-radius:12px;background:#fff;display:grid;place-items:center;overflow:hidden}
 .cr-img img{width:100%;height:100%;object-fit:contain}
 .cr-txt{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
@@ -746,6 +753,7 @@ input::placeholder,textarea::placeholder{color:#8a90a0;-webkit-text-fill-color:#
 .bld-item.on{border-color:var(--gold);box-shadow:0 0 0 3px rgba(176,141,74,.14)}
 .bld-item .bi-img{width:100%;aspect-ratio:1;border-radius:12px;background:#fff;display:grid;place-items:center;overflow:hidden}
 .bld-item .bi-img img{width:100%;height:100%;object-fit:contain}
+.todo{display:block;font-style:normal;font-size:11px;font-weight:600;line-height:1.3;background:#fff3c4;color:#7a5200;border:1px dashed #c9a227;border-radius:6px;padding:2px 6px;margin-top:2px}.bld-choc .bc-ph{display:grid;place-items:center;aspect-ratio:4/3;width:100%;border-radius:10px;background:#fff;font-family:var(--latin);font-size:34px;color:var(--gold)}
 .bld-item .bi-ph{font-family:var(--latin);font-size:34px;color:var(--gold)}
 .bld-item b{font-size:14px;line-height:1.3}
 .bi-row{display:flex;justify-content:space-between;align-items:center;gap:6px}
@@ -1040,6 +1048,28 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
 .bz-stp button{width:36px!important;height:36px!important;font-size:20px!important}.bz-stp output{min-width:26px!important;font-size:17px!important}
 .bz-add{width:100%}
 .bz-x{position:absolute;top:10px;left:10px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.92);box-shadow:0 2px 6px rgba(20,29,51,.15);font-size:24px;line-height:1;cursor:pointer;color:var(--ink);z-index:2}
+/* הזמנה מוקדמת */
+.early{display:flex;flex-direction:column;gap:18px;max-width:860px}
+.early-lead{font-size:18px;line-height:1.6;margin:0;color:var(--ink);text-wrap:pretty}
+.early-note{margin:0;background:#faf5ea;color:var(--ink);border:1px solid rgba(176,141,74,.35);border-radius:14px;padding:12px 16px;line-height:1.55}
+.early-h{margin:6px 0 0;font-size:19px}
+.early-tracks{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.early-tracks .et{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:18px 18px 16px;display:flex;flex-direction:column;gap:6px;position:relative}
+.early-tracks .et b{font-size:17px}.early-tracks .et p{margin:0;color:var(--muted);line-height:1.6}
+.et-n{width:30px;height:30px;border-radius:50%;background:var(--navy,#141d33);color:#e6c98e;display:grid;place-items:center;font-weight:700;font-size:14px}
+.early-cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.early-cats .ec{background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.early-cats .ec b{font-size:16px}.early-cats .ec span{color:var(--muted);font-size:14px;line-height:1.5}
+.early-cats.chips{display:flex;flex-wrap:wrap;gap:8px}.early-cats.chips .ec{padding:9px 14px;border-radius:999px}
+.early-form{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.early-form h3{margin:0;font-size:19px}
+.ef-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.early-form label{display:flex;flex-direction:column;gap:5px;font-size:14px;color:var(--muted)}
+.early-form input,.early-form textarea{font:inherit;font-size:16px;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;min-width:0}
+.early-form input[aria-invalid=true]{border-color:#c0392b}
+.early-form .add{align-self:flex-start;min-width:160px}
+.ef-err{margin:0;color:#c0392b}.ef-done{margin:0;font-size:17px;color:var(--ink);line-height:1.6}
+@media (max-width:560px){.ef-grid{grid-template-columns:1fr}.early-form .add{align-self:stretch}}
 </style>
 
 </head><body><svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1132,7 +1162,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
       <div class="bld-hero-text">
         <span class="bld-eyebrow" id="bldEyebrow"></span>
         <h1 id="bldH">מארזים</h1>
-        <p class="lead bld-lead">כל מארז מגיע בשקית ממותגת,<br>עם דף ברכה אישי, שוקולד משובח ותבנית סיליקון לדונאטס.<br><span>מוסיפים מתנות, והמארז גדל איתכם.</span></p>
+        <p class="lead bld-lead">כל מארז מגיע בשקית ממותגת,<br>עם דף ברכה אישי, <i id="bldLeadMid" style="font-style:normal">שוקולד משובח ותבנית סיליקון לדונאטס</i>.<br><span>מוסיפים מתנות, והמארז גדל איתכם.</span></p>
       </div>
       
     </div>
@@ -1142,12 +1172,17 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
 
 
         <section class="bld-step" aria-labelledby="bs2">
-          <div class="st-hd"><span class="bld-n">1</span><div><h2 id="bs2">בוחרים גודל שוקולד</h2><p>המחיר כולל שקית ממותגת, תבנית סיליקון לדונאטס ודף ברכה עם הלוגו שלכם.</p></div></div>
+          <div class="st-hd"><span class="bld-n">1</span><div><h2 id="bs2">בוחרים גודל שוקולד</h2><p id="bs2sub">המחיר כולל שקית ממותגת, תבנית סיליקון לדונאטס ודף ברכה עם הלוגו שלכם.</p></div></div>
           <div class="bld-chocs" id="bldChocs"></div>
         </section>
 
+        <section class="bld-step" aria-labelledby="bsU" id="bldUpgStep" hidden>
+          <div class="st-hd"><span class="bld-n">2</span><div><h2 id="bsU"></h2><p id="bsUsub"></p></div></div>
+          <div class="bld-chocs" id="bldUpg"></div>
+        </section>
+
         <section class="bld-step" aria-labelledby="bs3">
-          <div class="st-hd"><span class="bld-n">2</span><div><h2 id="bs3">מוסיפים מתנות</h2><p>נכנסים לקטגוריה ומוסיפים מתנות. כל מתנה בתוספת תשלום. המתנות שבחרתם מופיעות ליד השקית.</p></div></div>
+          <div class="st-hd"><span class="bld-n">2</span><div><h2 id="bs3">מוסיפים מתנות</h2><p>פותחים קטגוריה ומוסיפים מתנות. כל מתנה בתוספת תשלום. המתנות שבחרתם מופיעות ליד השקית.</p></div></div>
           <div class="bld-cats" id="bldCats" role="tablist" aria-label="קטגוריות מתנות"></div>
           <div class="bld-tools" id="bldTools">
             <label class="tool-ic" title="מיון"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M7 20l-3-3M7 20l3-3"/><path d="M17 20V4M17 4l-3 3M17 4l3 3"/></svg><select id="bldSort" aria-label="מיון"><option value="pa">מחיר: מהנמוך לגבוה</option><option value="pd">מחיר: מהגבוה לנמוך</option><option value="nm">לפי שם</option></select></label>
@@ -1345,7 +1380,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
     <details><summary>אפשר לשלוח את המארזים ישירות לבית כל עובד?</summary><p>כן. בסיום ההזמנה בוחרים "משלוח לבית כל עובד", ואנחנו ניצור קשר כדי לקבל את רשימת הכתובות.</p></details>
     <details><summary>כמה זמן לוקח המשלוח?</summary><p>אנחנו שולחים לכל הארץ. זמן האספקה נקבע לפי אזור המשלוח, ויש גם אפשרות למשלוח מהיר או אקספרס. נתאם איתכם את המועד המדויק אחרי ההזמנה.</p></details>
     <details><summary>מקבלים חשבונית מס?</summary><p>כן. בסיום ההזמנה רושמים את שם העסק לחשבונית.</p></details>
-    <details><summary>איך בונים מארז?</summary><p>כל מארז מתחיל מהבסיס: שקית ממותגת, שוקולד, תבנית סיליקון לדונאטס ודף ברכה עם הלוגו שלכם. מחיר הבסיס נקבע לפי גודל השוקולד. מוסיפים מתנות לפי הטעם, ואחרי ההזמנה נחזור אליכם לתאם את כל הפרטים.</p></details>
+    <details><summary>איך בונים מארז?</summary><p>כל מארז מתחיל מהבסיס: שקית ממותגת, דף ברכה עם הלוגו שלכם והמוצר המרכזי של החג (שוקולד, פרלינים או פיצוחים). מחיר הבסיס נקבע לפי הגודל שבוחרים. מוסיפים מתנות לפי הטעם, ואחרי ההזמנה נחזור אליכם לתאם את כל הפרטים.</p></details>
     
     <details><summary>אפשר להוסיף את הלוגו של החברה?</summary><p>כן. בכל מארז יש כרטיס ברכה עם הלוגו של החברה, בלי תוספת תשלום.</p></details>
     <details><summary>איך משלמים?</summary><p>אחרי שליחת ההזמנה ניצור איתכם קשר לסגירת הפרטים הסופיים. לאחר אישור סופי משלמים את מלוא סכום ההזמנה, מקבלים חשבונית, ואנחנו מתחילים בהכנת המארזים. אפשר לשלם בהעברה בנקאית או בביט.</p></details>
@@ -1443,7 +1478,7 @@ html.a11y-cursor,html.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns=
     <p class="pop-done" id="pDone" hidden>תודה! קיבלנו את הפרטים ונחזור אליכם בהקדם.</p>
   </div>
 </div>
-<form name="lead" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="bot-field"><input name="subject"><input name="source"><input name="full_name"><input name="phone"><input name="email"></form>
+<form name="lead" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="bot-field"><input name="subject"><input name="source"><input name="full_name"><input name="phone"><input name="email"><input name="business"><input name="employees"><input name="budget"><input name="message"><input name="holiday"></form>
 <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="bot-field"><input name="subject"><input name="full_name"><input name="phone"><input name="business"><textarea name="message"></textarea></form>
 <form name="order" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
   <input name="bot-field"><input name="subject"><input name="order_page"><input name="full_name"><input name="phone"><input name="email"><input name="business"><input name="delivery"><input name="order_total"><input name="packages"><input name="discount"><textarea name="notes"></textarea><input name="order_id"><textarea name="summary"></textarea><textarea name="greeting"></textarea>
@@ -1525,6 +1560,22 @@ const HOLIDAYS = [
   {id:"rosh-hashana", name:"ראש השנה", when:"תשרי", date:"2027-10-02"},
   {id:"sukkot", name:"סוכות", when:"תשרי", date:"2027-10-16"}
 ];
+// הזמנה מוקדמת: חגים שעוד אין להם מוצרים באתר, אבל כבר מקבלים פניות
+const EARLY={
+  "tu-bishvat":{lead:"מארזי ט״ו בשבט בכשרות מהודרת: פיצוחים ופירות יבשים מובחרים, שוקולד מעוצב לחג ומתנה שנשארת על השולחן.",
+    cats:[{n:"שוקולדים לט״ו בשבט",d:"שוקולד בצורות פירות, פירות יבשים ואגוזים מצופים שוקולד, תמרים ממולאים"},
+          {n:"פיצוחים ופירות יבשים",d:"ערכות בשלושה גדלים: מארז טעימות, מארז שפע ומארז מלכותי"},
+          {n:"מתנות",d:"כלי הגשה מעוצבים לפיצוחים מאקריליק, זכוכית או חרסינה, עציצים ושתילים"}]},
+  "purim":{lead:"מארזי פורים לעובדים וללקוחות: שוקולדים מעוצבים לחג, ממתקים מובחרים ומתנות מכובדות.",
+    cats:[{n:"שוקולדים, חטיפים וממתקים",d:"שוקולד בצורות של פורים, הדפס \"פורים שמח\", ממתקים מובחרים"},
+          {n:"מתנות",d:"יינות וליקרים, יין עם כוסות, קנקן קריסטל, פותחני יין, מגשי הגשה"}]},
+  "pesach":{lead:"מתנות לפסח לכל תקציב, מ־200 ₪ ועד אלפי ₪ לעובד. שני מסלולים, ואנחנו מטפלים בכל השאר.",
+    tracks:[{n:"גיפט קארד",d:"שקית ממותגת עם פרלינים כשרים לפסח, תו קנייה של רשת באזור המגורים של העובדים, ודף ברכה עם הלוגו שלכם. הסכום לפי בחירתכם."},
+            {n:"העובדים בוחרים מתנה",d:"אתם קובעים תקציב, ואנחנו מכינים לעובדים עמוד בחירה עם הלוגו שלכם. כל עובד נכנס עם מספר עובד, בוחר מתנה אחת (בלי לראות מחירים) וממלא כתובת למשלוח. המערכת פתוחה לתקופה שתקבעו, ובסופה מקבלים דוח מסודר."}],
+    cats:[{n:"מכשירי חשמל",d:""},{n:"למטבח",d:""},{n:"גאדג'טים",d:""},{n:"משחקים לילדים",d:""},{n:"כלי בית",d:""},{n:"יודאיקה לפסח",d:""}]}
+};
+const EARLY_ON=false; // הזמנה מוקדמת כבויה לפי בקשה. להפעלה: true
+function holEarly(h){return EARLY_ON&&!holHas(h)&&!!EARLY[h.id]}
 const HE_MONTHS=["ינואר","פברואר","מרץ","אפריל","מאי","יוני","יולי","אוגוסט","ספטמבר","אוקטובר","נובמבר","דצמבר"];
 function monthLabel(h){const d=new Date(h.date+"T12:00:00");return `${HE_MONTHS[d.getMonth()]} ${d.getFullYear()}`}
 // keep calendar order, rolling holidays that already passed to the end
@@ -1562,7 +1613,7 @@ var BCAT={
   bag:38,                              // שקית + כרטיס ברכה + תבנית סיליקון. בסיס עם 2 פרלינים = 38+17 = ₪55
   base:{name:'תבנית סיליקון לדונאטס',img:'img/item-mold.jpg',pts:3},
   packs:{bag:{name:'שקית ממותגת',price:10},med:{name:'שקית בינונית',price:20},lrg:{name:'שקית גדולה',price:30}}, // מחירי שקיות (הקטנה כלולה בבסיס) – זמני
-  cats:[{id:'men',name:'חנוכיות',img:'img/cr-large.webp'},{id:'oil',name:'שמן זית, נרות וסביבונים',img:'img/item-dreidels.jpg'},{id:'elec',name:'מכשירי חשמל / אפייה',img:'img/waffle2.jpg'}],
+  cats:[{id:'men',h:['hanukkah'],name:'חנוכיות',img:'img/cr-large.webp'},{id:'oil',h:['hanukkah'],name:'שמן זית, נרות וסביבונים',img:'img/item-dreidels.jpg'},{id:'elec',name:'מכשירי חשמל / אפייה',img:'img/waffle2.jpg'}],
   wrap:10,
   choc:[ // מחיר הבסיס = שקית + דף ברכה + השוקולד
     {id:'p2',name:'2 פרלינים',img:'img/pralines-2.jpg',price:17,pts:2},
@@ -1597,12 +1648,105 @@ var BCAT={
       {id:'dmold',cat:'elec',name:'תבנית סיליקון לדונאטס, בגדלים שונים',img:'img/item-mold-h.jpg',price:34,from:true,pts:6}]
   }
 };
-function bBase(c){return BCAT.bag+c.price}
+
+// ===== טיוטה: ט"ו בשבט, פורים ופסח. מוצג רק כש-DRAFT_ON=true (תצוגה מקדימה, לא לאתר החי) =====
+// todo = מה עוד חסר במוצר (מוצג כתגית צהובה בתצוגה המקדימה). המחירים כאן לדוגמה בלבד.
+const DRAFT_ON=false;
+const DRAFT={
+  hol:{
+    'tu-bishvat':{t1:'בוחרים גודל שוקולד',sub1:'המחיר כולל שקית ממותגת, מארז פיצוחים קטן ודף ברכה עם הלוגו שלכם. הכול בבד״ץ העדה החרדית.',
+      lead:'שוקולד משובח ומארז פיצוחים ופירות יבשים',baseLbl:'שקית, דף ברכה, מארז פיצוחים קטן',
+      base:{name:'מארז פיצוחים קטן',pts:3,todo:'ספק, תמונה ומה יש בו'},
+      upg:{title:'משדרגים את מארז הפיצוחים',sub:'מארז פיצוחים קטן כבר כלול. אפשר להחליף אותו במארז גדול יותר.',
+        opts:[{id:'nutM',name:'מארז פיצוחים בינוני',price:20,pts:2,todo:'ספק, מחיר ותמונה'},
+              {id:'nutL',name:'מארז פיצוחים גדול',price:45,pts:4,todo:'ספק, מחיר ותמונה'}]},
+      choc:[{id:'p2',name:'2 פרלינים',img:'img/pralines-2.jpg',price:17,bag:35,pts:2,todo:'מחיר בסיס עם פיצוחים'},
+            {id:'p4',name:'4 פרלינים',img:'img/pralines-4.jpg',price:28,bag:35,pts:2,todo:'מחיר בסיס עם פיצוחים'},
+            {id:'p6',name:'6 פרלינים',img:'img/pralines-6.jpg',price:40,bag:35,pts:2,todo:'מחיר בסיס עם פיצוחים'},
+            {id:'p9',name:'9 פרלינים',img:'img/pralines-9.jpg',price:55,bag:35,pts:4,todo:'מחיר בסיס עם פיצוחים'},
+            {id:'p12',name:'12 פרלינים',img:'img/pralines-12.jpg',price:70,bag:35,pts:4,todo:'מחיר בסיס עם פיצוחים'}]},
+    'purim':{t1:'בוחרים גודל שוקולד',sub1:'המחיר כולל שקית ממותגת ודף ברכה עם הלוגו שלכם.',
+      lead:'שוקולד משובח',baseLbl:'שקית ודף ברכה',base:null,
+      choc:[{id:'p2',name:'2 פרלינים',img:'img/pralines-2.jpg',price:17,bag:20,pts:2,todo:'מחיר בלי תבנית'},
+            {id:'p4',name:'4 פרלינים',img:'img/pralines-4.jpg',price:28,bag:20,pts:2,todo:'מחיר בלי תבנית'},
+            {id:'p6',name:'6 פרלינים',img:'img/pralines-6.jpg',price:40,bag:20,pts:2,todo:'מחיר בלי תבנית'},
+            {id:'p9',name:'9 פרלינים',img:'img/pralines-9.jpg',price:55,bag:20,pts:4,todo:'מחיר בלי תבנית'},
+            {id:'p12',name:'12 פרלינים',img:'img/pralines-12.jpg',price:70,bag:20,pts:4,todo:'מחיר בלי תבנית'}]},
+    'pesach':{t1:'בוחרים פרלינים כשרים לפסח',sub1:'המחיר כולל שקית ממותגת ודף ברכה עם הלוגו שלכם. אפשר להוסיף גיפט קארד לרשתות החרדיות.',
+      lead:'פרלינים כשרים לפסח',baseLbl:'שקית ודף ברכה',base:null,
+      choc:[{id:'p2',name:'2 פרלינים כשרים לפסח',img:'img/pralines-2.jpg',price:20,bag:20,pts:2,todo:'ספק כשר לפסח ותמונה'},
+            {id:'p4',name:'4 פרלינים כשרים לפסח',img:'img/pralines-4.jpg',price:32,bag:20,pts:2,todo:'ספק כשר לפסח ותמונה'},
+            {id:'p6',name:'6 פרלינים כשרים לפסח',img:'img/pralines-6.jpg',price:45,bag:20,pts:2,todo:'ספק כשר לפסח ותמונה'},
+            {id:'p9',name:'9 פרלינים כשרים לפסח',img:'img/pralines-9.jpg',price:60,bag:20,pts:4,todo:'ספק כשר לפסח ותמונה'}]}
+  },
+  cats:[
+    {id:'pchoc',h:['purim'],name:'שוקולדים'},
+    {id:'psnack',h:['purim'],name:'חטיפים וממתקים'},
+    {id:'wine',h:['purim'],name:'יינות ומשקאות'},
+    {id:'bar',h:['purim'],name:'קנקנים, כוסות ואביזרי יין'},
+    {id:'gc',h:['pesach'],name:'גיפט קארד לרשתות החרדיות'},
+    {id:'pkit',h:['pesach'],name:'לשולחן החג ולמטבח'},
+    {id:'pel',h:['pesach'],name:'מכשירי חשמל לפסח'},
+    {id:'serve',h:['pesach'],name:'כלי הגשה'},
+    {id:'tbchoc',h:['tu-bishvat'],name:'שוקולדים'},
+    {id:'tbnuts',h:['tu-bishvat'],name:'פיצוחים ופירות יבשים'},
+    {id:'tbgift',h:['tu-bishvat'],name:'מתנות נוספות: מגשי הגשה'}],
+  items:{
+    'tu-bishvat':[
+      {id:'tb1',cat:'tbchoc',name:'שוקולד בצורת פירות',price:15,pts:2,todo:'מהקטלוג החדש: שם, מחיר ותמונה'},
+      {id:'tb2',cat:'tbchoc',name:'פירות יבשים מצופים שוקולד',price:20,pts:2,todo:'מהקטלוג החדש: שם, מחיר ותמונה'},
+      {id:'tb3',cat:'tbchoc',name:'טבלת שוקולד מעוצבת',price:18,pts:2,todo:'מהקטלוג החדש: שם, מחיר ותמונה'},
+      {id:'tn1',cat:'tbnuts',name:'תמרי מג׳הול',price:25,pts:3,todo:'ספק, מחיר ותמונה'},
+      {id:'tn2',cat:'tbnuts',name:'מארז פירות יבשים',price:30,pts:3,todo:'ספק, מחיר ותמונה'},
+      {id:'tn3',cat:'tbnuts',name:'פיצוחים מצופים',price:20,pts:2,todo:'ספק, מחיר ותמונה'},
+      {id:'sv1',cat:'tbgift',name:'מגש הגשה מחולק ל־4 תאים, אקריליק',price:35,pts:6,todo:'ספק, מחיר ותמונה'},
+      {id:'sv2',cat:'tbgift',name:'מגש עץ עם תאים',price:45,pts:8,todo:'ספק, מחיר ותמונה'},
+      {id:'sv3',cat:'tbgift',name:'מגש זכוכית עם 3 קעריות',price:60,pts:10,todo:'ספק, מחיר ותמונה'},
+      {id:'sv6',cat:'tbgift',name:'מגש נירוסטה מחולק',price:30,pts:6,todo:'ספק (מטרפה), מחיר ותמונה'},
+      {id:'sv7',cat:'tbgift',name:'מגש מסתובב עם תאים',price:70,pts:10,todo:'ספק, מחיר ותמונה'},
+      {id:'sv8',cat:'tbgift',name:'מגש קרמיקה מחולק',price:55,pts:8,todo:'ספק, מחיר ותמונה'}],
+    'purim':[
+      {id:'pu1',cat:'pchoc',name:'שוקולד בצורת מסכה',price:15,pts:2,todo:'ספק, מחיר ותמונה'},
+      {id:'pu2',cat:'pchoc',name:'טבלת שוקולד עם הדפס "פורים שמח"',price:18,pts:2,todo:'ספק, מחיר ותמונה'},
+      {id:'pu3',cat:'pchoc',name:'מארז פרלינים לפורים',price:30,pts:3,todo:'ספק, מחיר ותמונה'},
+      {id:'ps1',cat:'psnack',name:'מארז חטיפים',price:20,pts:4,todo:'ספק, מחיר ותמונה'},
+      {id:'ps2',cat:'psnack',name:'סוכריות וממתקים',price:15,pts:3,todo:'ספק, מחיר ותמונה'},
+      {id:'ps3',cat:'psnack',name:'עוגיות ווופלים',price:18,pts:3,todo:'ספק, מחיר ותמונה'},
+      {id:'ps4',cat:'psnack',name:'מארז ממתקים גדול',price:35,pts:6,todo:'ספק, מחיר ותמונה'},
+      {id:'wn1',cat:'wine',name:'יין אדום יבש',price:60,from:true,pts:8,todo:'ספק (רישיון אלכוהול), מחיר ותמונה'},
+      {id:'wn2',cat:'wine',name:'מארז יין ושתי כוסות',price:110,pts:15,todo:'ספק, מחיר ותמונה'},
+      {id:'wn3',cat:'wine',name:'ליקר',price:70,from:true,pts:8,todo:'ספק, מחיר ותמונה'},
+      {id:'wn4',cat:'wine',name:'וויסקי',price:120,from:true,pts:8,todo:'ספק, מחיר ותמונה'},
+      {id:'br1',cat:'bar',name:'קנקן קריסטל',price:90,pts:12,todo:'ספק, מחיר ותמונה'},
+      {id:'br2',cat:'bar',name:'סט 2 כוסות יין',price:45,pts:8,todo:'ספק, מחיר ותמונה'},
+      {id:'br3',cat:'bar',name:'פותחן יין חשמלי',price:60,pts:5,todo:'ספק, מחיר ותמונה'},
+      ],
+    'pesach':[
+      {id:'gc1',cat:'gc',name:'שי כארד ₪100, מימוש בכ־500 רשתות וחנויות',price:100,pts:1,todo:'עמלה/הנחה ותמונה'},
+      {id:'gc2',cat:'gc',name:'שי כארד ₪200',price:200,pts:1,todo:'עמלה/הנחה ותמונה'},
+      {id:'gc3',cat:'gc',name:'שי כארד ₪500',price:500,pts:1,todo:'עמלה/הנחה ותמונה'},
+      {id:'gc4',cat:'gc',name:'שי כארד ₪1,000',price:1000,pts:1,todo:'עמלה/הנחה ותמונה'},
+      {id:'gc5',cat:'gc',name:'גיפט קארד בסכום אחר',price:null,pts:1,todo:'איך מזמינים סכום חופשי'},
+      {id:'pk1',cat:'pkit',name:'קערת ליל הסדר',price:80,from:true,pts:12,todo:'ספק, מחיר ותמונה'},
+      {id:'pk2',cat:'pkit',name:'סט כלי הגשה לחג',price:90,pts:15,todo:'ספק, מחיר ותמונה'},
+      {id:'pk3',cat:'pkit',name:'מפת שולחן לחג',price:60,pts:8,todo:'ספק, מחיר ותמונה'},
+      {id:'pe1',cat:'pel',name:'מעבד מזון',price:250,from:true,pts:40,big:true,todo:'ספק (מחסני חשמל / באג), מחיר ותמונה'},
+      {id:'pe2',cat:'pel',name:'בלנדר מוט',price:150,from:true,pts:25,big:true,todo:'ספק, מחיר ותמונה'},
+      {id:'pe3',cat:'pel',name:'מיחם חשמלי לשבת',price:200,from:true,pts:30,big:true,todo:'ספק, מחיר ותמונה'},
+      {id:'sv5',cat:'serve',name:'מגש הגשה מעוצב',price:50,pts:10,todo:'ספק, מחיר ותמונה'}]}
+};
+if(DRAFT_ON){BCAT.hol=DRAFT.hol;Object.entries(DRAFT.hol).forEach(([hid,P])=>{if(P.upg)DRAFT.items[hid]=[...P.upg.opts.map(o=>({...o,cat:'_upg',upg:true})),...(DRAFT.items[hid]||[])]});BCAT.cats=[...BCAT.cats.filter(c=>c.id!=='elec'),...DRAFT.cats,...BCAT.cats.filter(c=>c.id==='elec')];Object.assign(BCAT.items,DRAFT.items);
+  BCAT.cats.forEach(c=>{if(c.id==='elec')c.h=['hanukkah','purim']})}
+function bBase(c){return (c.bag!=null?c.bag:BCAT.bag)+c.price}
+// ===== פרופיל לכל חג: מה המוצר המרכזי בבסיס, ומה כתוב בשלב 1 =====
+function bHol(hid){const d={choc:BCAT.choc,base:BCAT.base,t1:'בוחרים גודל שוקולד',sub1:'המחיר כולל שקית ממותגת, תבנית סיליקון לדונאטס ודף ברכה עם הלוגו שלכם.',lead:'שוקולד משובח ותבנית סיליקון לדונאטס',baseLbl:'שקית, דף ברכה, תבנית סיליקון'};
+  return Object.assign({},d,(BCAT.hol||{})[hid]||{})}
 function bItems(hid){return [...(BCAT.items[hid]||[]).map(x=>({...x,g:hid})),...BCAT.items.general.map(x=>({...x,g:'general'}))]}
 function bPlan(hid,cid,qmap){
-  const cap=BCAT.cap, choc=BCAT.choc.find(c=>c.id===cid)||BCAT.choc[0], all=bItems(hid);
+  const cap=BCAT.cap, HP=bHol(hid), choc=HP.choc.find(c=>c.id===cid)||HP.choc[0], all=bItems(hid);
   const chosen=all.filter(i=>(qmap||{})[i.id]>0).flatMap(i=>Array.from({length:qmap[i.id]},()=>i));
-  const basePts=(BCAT.base?BCAT.base.pts:0);
+  const up=chosen.find(i=>i.upg);const baseItem=up||HP.base;
+  const basePts=(baseItem?baseItem.pts:0)-(up?up.pts:0);
   const pts=choc.pts+basePts+chosen.reduce((a,i)=>a+i.pts,0);
   // שקית אחת קבועה. גודל השקית ועטיפה נפרדת מתואמים מול הלקוח אחרי ההזמנה
   let inside=chosen.slice(),separate=[],pack='bag';
@@ -1610,7 +1754,7 @@ function bPlan(hid,cid,qmap){
   const boxAdd=BCAT.packs[pack].price-BCAT.packs.bag.price;
   const unit=bBase(choc)+boxAdd+chosen.reduce((a,i)=>a+i.price,0)+separate.length*BCAT.wrap;
   const counts=all.filter(i=>(qmap||{})[i.id]>0).map(i=>({...i,q:qmap[i.id]}));
-  return {choc,chosen,counts,inside,separate,pack,inPts,unit,boxAdd,cap:cap[pack]};
+  return {choc,chosen,counts,inside,separate,pack,inPts,unit,boxAdd,cap:cap[pack],baseItem,up};
 }
 
 const PRODUCTS = {};
@@ -1726,7 +1870,7 @@ var render=function(id){
   if(!h&&id){const m=TIERS.find(tt=>id.endsWith("-"+tt.id));if(m){h=HOLIDAYS.find(x=>x.id===id.slice(0,-(m.id.length+1)));if(h)t=m}}
   if(h&&!t&&holHas(h))t=TIERS.find(tt=>((PRODUCTS[h.id]||{})[tt.id]||[]).length)||TIERS[0];
   CUR=h||NEXT; VIEW=!h?"home":t?"tier":"holiday"; document.body.dataset.view=VIEW;
-  $("#holList").innerHTML = HOLIDAYS.map((x,k)=>`<li><button data-id="${x.id}" aria-current="${!!h&&x.id===h.id}"><span class="hl-name">${x.name}${k===0?'<em class="hl-next">הקרוב</em>':''}</span><small>${x.when}${holHas(x)?'':' · בקרוב'}</small></button></li>`).join("");
+  $("#holList").innerHTML = HOLIDAYS.map((x,k)=>`<li><button data-id="${x.id}" aria-current="${!!h&&x.id===h.id}"><span class="hl-name">${x.name}${k===0?'<em class="hl-next">הקרוב</em>':''}</span><small>${x.when}${holHas(x)?'':holEarly(x)?' · הזמנה מוקדמת':' · בקרוב'}</small></button></li>`).join("");
   const crumbs=(...parts)=>`<nav class="crumbs" aria-label="ניווט"><a href="#">כל החגים</a>${parts.map(([txt,href])=>href?` <span aria-hidden="true">‹</span> <a href="${href}">${txt}</a>`:` <span aria-hidden="true">‹</span> <span aria-current="page">${txt}</span>`).join("")}</nav>`;
   let html="";
   if(VIEW==="home"){
@@ -1734,9 +1878,34 @@ var render=function(id){
       <div class="hq-wrap"><input id="hq" type="search" placeholder="חיפוש חג או מוצר" aria-label="חיפוש חג או מוצר"></div></div>
     <div class="hq-res" id="hqRes" hidden></div>
     <p class="hq-empty" id="hqEmpty" hidden>לא מצאנו חג או מוצר בשם הזה. נסו מילה אחרת, או <a href="#contact">כתבו לנו</a>.</p>
-    <div class="hol-grid">${HOLIDAYS.map((x,k)=>{const has=holHas(x);return `<a class="hol-card${has?'':' soon'}" href="#${x.id}" data-hay="${holHay(x)}">
+    <div class="hol-grid">${HOLIDAYS.map((x,k)=>{const has=holHas(x),early=holEarly(x);return `<a class="hol-card${has||early?'':' soon'}" href="#${x.id}" data-hay="${holHay(x)}">
       <div class="hv">${holVisual(x)}${k===0?'<em class="hl-next">החג הקרוב</em>':''}</div>
-      <div class="hc-body"><h3>${x.name}</h3><small>${x.when}</small><span class="hc-cta">${has?'לבחירת מתנה ‹':'בקרוב'}</span></div></a>`}).join("")}</div>`;
+      <div class="hc-body"><h3>${x.name}</h3><small>${x.when}</small><span class="hc-cta">${has?'לבחירת מתנה ‹':early?'הזמנה מוקדמת ‹':'בקרוב'}</span></div></a>`}).join("")}</div>`;
+  }else if(VIEW==="holiday"&&holEarly(h)){
+    const E=EARLY[h.id];
+    html=crumbs([h.name])+`<div class="holiday-head"><h2>מארזי ${h.name}</h2><span>${h.when} · הזמנה מוקדמת</span></div>
+    <section class="early">
+      <p class="early-lead">${E.lead}</p>
+      <p class="early-note"><b>חברות כבר סוגרות עכשיו.</b> השאירו פרטים, ונחזור אליכם עם הצעה לפי מספר העובדים והתקציב.</p>
+      ${E.tracks?`<div class="early-tracks">${E.tracks.map((t,i)=>`<div class="et"><span class="et-n">${i+1}</span><b>${t.n}</b><p>${t.d}</p></div>`).join("")}</div>`:""}
+      <h3 class="early-h">${E.tracks?'מה אפשר לבחור':'מה יהיה במארזים'}</h3>
+      <div class="early-cats${E.cats.every(c=>!c.d)?' chips':''}">${E.cats.map(c=>`<div class="ec"><b>${c.n}</b>${c.d?`<span>${c.d}</span>`:''}</div>`).join("")}</div>
+      <form class="early-form" id="earlyForm" novalidate>
+        <h3>קבלו הצעה מוקדמת ל${h.name}</h3>
+        <div class="ef-grid">
+          <label>שם מלא<input id="eName" autocomplete="name" required></label>
+          <label>שם העסק<input id="eBiz" autocomplete="organization"></label>
+          <label>טלפון<input id="ePhone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+          <label>מייל<input id="eMail" type="email" autocomplete="email"></label>
+          <label>כמה עובדים, בערך<input id="eQty" inputmode="numeric"></label>
+          <label>תקציב לעובד, בערך<input id="eBudget" placeholder="למשל 150 ₪"></label>
+        </div>
+        <label>משהו נוסף שחשוב לכם<textarea id="eMsg" rows="2"></textarea></label>
+        <p class="ef-err" id="eErr" hidden></p>
+        <button type="submit" class="add">שליחה</button>
+        <p class="ef-done" id="eDone" hidden></p>
+      </form>
+    </section>`;
   }else if(VIEW==="holiday"){
     html=crumbs([h.name])+`<div class="holiday-head"><h2>מתנות ל${h.name}</h2><span>${h.when}</span></div><div class="maint"><div class="seal">V</div><div><strong>בקרוב</strong><span>המארזים ל${h.name} יעלו בקרוב. אפשר כבר עכשיו <a href="#contact">לכתוב לנו</a>.</span></div></div>`;if(false)html+=`
     <div class="tier-grid">${TIERS.map((tt,k)=>{const items=(PRODUCTS[h.id]||{})[tt.id]||[];const from=tierFrom(items);
@@ -1805,7 +1974,7 @@ function gcDet(g){if(!g)return["כרטיס ברכה: ננסח יחד"];const o=[
 function lineKey(l){return JSON.stringify([l.h,l.c,l.it,l.g||null])}
 function lineInfo(l){const h=HOLIDAYS.find(x=>x.id===l.h)||{name:""};const P=bPlan(l.h,l.c,l.it);
   const det=[`שוקולד: ${P.choc.name}`,...P.counts.map(i=>`${i.name}${i.q>1?" ×"+i.q:""}`),...(P.separate.length?[`עטוף בנפרד: ${P.separate.map(x=>x.name).join(", ")}`]:[]),...gcDet(l.g)];
-  return {title:`מארז ${h.name}`,hol:h.name,pack:BCAT.packs[P.pack].name+(P.separate.length?" + עטיפה נפרדת":""),unit:P.unit,img:P.choc.img,det}}
+  return {title:`מארז ${h.name}`,hol:h.name,pack:BCAT.packs[P.pack].name+(P.separate.length?" + עטיפה נפרדת":""),unit:P.unit,img:P.choc.img||"img/bag-venia.webp",det}}
 const GFILES={}; // קבצי לוגו/כרטיס נשמרים בזיכרון עד שליחת ההזמנה
 function bAdd(h,c,it,q,gc){const clean={};Object.keys(it||{}).sort().forEach(k=>{if(it[k]>0)clean[k]=it[k]});
   gc=gc||{mode:'text',text:'',sig:''};const g={mode:gc.mode,text:gc.text||'',sig:gc.sig||'',logo:gc.logo?gc.logo.name:'',card:gc.card?gc.card.name:''};
@@ -2011,6 +2180,20 @@ $("#leadForm").addEventListener("submit",async e=>{e.preventDefault();
 (function(){
   const pop=$("#pop");if(!pop)return;
   const seen=()=>{try{return localStorage.getItem("venia-pop")}catch(e){return null}};
+  document.addEventListener("submit",async e=>{if(e.target.id!=="earlyForm")return;e.preventDefault();
+    const h=CUR||{},v=id=>$("#"+id).value.trim();
+    const f={full_name:v("eName"),business:v("eBiz"),phone:v("ePhone"),email:v("eMail"),employees:v("eQty"),budget:v("eBudget"),message:v("eMsg")};
+    const okN=f.full_name.length>=2,okP=/^[0-9+\-\s()]{9,}$/.test(f.phone),okM=!f.email||/^\S+@\S+\.\S+$/.test(f.email);
+    $("#eName").setAttribute("aria-invalid",!okN);$("#ePhone").setAttribute("aria-invalid",!okP);$("#eMail").setAttribute("aria-invalid",!okM);
+    if(!okN||!okP||!okM){$("#eErr").textContent=!okN||!okP?"נא למלא שם ומספר טלפון תקין.":"כתובת המייל לא תקינה.";$("#eErr").hidden=false;return}
+    $("#eErr").hidden=true;const btn=e.target.querySelector("button[type=submit]");btn.disabled=true;
+    const txt=`הזמנה מוקדמת ל${h.name}\nשם: ${f.full_name}`+(f.business?`\nעסק: ${f.business}`:"")+`\nטלפון: ${f.phone}`+(f.email?`\nמייל: ${f.email}`:"")+(f.employees?`\nעובדים: ${f.employees}`:"")+(f.budget?`\nתקציב לעובד: ${f.budget}`:"")+(f.message?`\nהערות: ${f.message}`:"");
+    if(ORDER_MODE==="netlify"){try{const r=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams({"form-name":"lead",subject:`הזמנה מוקדמת ל${h.name}: ${f.full_name}${f.business?" · "+f.business:""}${f.employees?" · "+f.employees+" עובדים":""}`,source:"הזמנה מוקדמת",holiday:h.name||"",...f}).toString()});if(!r.ok)throw 0;notifyOwner("פנייה חדשה באתר VENIA\n"+txt)}
+      catch(x){btn.disabled=false;$("#eErr").textContent="השליחה לא הצליחה. נסו שוב, או שלחו לנו הודעה בוואטסאפ.";$("#eErr").hidden=false;return}}
+    e.target.querySelectorAll("label,.ef-grid,button,h3").forEach(n=>n.hidden=true);
+    $("#eDone").textContent=`תודה ${f.full_name.split(" ")[0]}! קיבלנו את הפרטים, ונחזור אליכם עם הצעה ל${h.name} בהקדם.`;$("#eDone").hidden=false;
+    track("generate_lead",{form:"early_order",holiday:h.id||""});
+  });
   const mark=v=>{try{localStorage.setItem("venia-pop",v)}catch(e){}};
   const close=()=>{pop.hidden=true;mark("closed")};
   setTimeout(()=>{if(seen()||document.body.dataset.view!=="home"||document.querySelector("aside.cart.open,#drawer.open"))return;pop.hidden=false;$("#pName").focus()},9000);
@@ -2122,7 +2305,7 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
   const cardTile=k=>`<span class="tl card" style="width:${Math.round(44*k)}px;height:${Math.round(36*k)}px">תודה!<em>VENIA</em></span>`;
   function stage(P){
     let html='';
-    {const tiles=[`<span class="tl card">תודה!<em>VENIA</em></span>`,P.choc,BCAT.base,...P.inside].map(o=>typeof o==='string'?o:(o.img?`<span class="tl"><img src="${o.img}" alt=""></span>`:`<span class="tl ph">✦</span>`));
+    {const tiles=[`<span class="tl card">תודה!<em>VENIA</em></span>`,P.choc,...(P.baseItem?[P.baseItem]:[]),...P.inside.filter(i=>!i.upg)].map(o=>typeof o==='string'?o:(o.img?`<span class="tl"><img src="${o.img}" alt=""></span>`:`<span class="tl ph">✦</span>`));
       const cols=Math.ceil(tiles.length/3),rows=Math.min(3,tiles.length);
       html=`<div class="pk-wrap"><div class="pk-bagset"><div class="pk-bag-img sz-${P.pack}"><img src="img/bag-venia.webp" alt="שקית VENIA ממותגת" width="640" height="823"></div><div class="bs-items c${Math.min(cols,4)}" style="grid-template-rows:repeat(${rows},auto)">${tiles.join('')}</div></div></div>`;}
     html+=P.separate.map(s=>`<span class="pk-plus" aria-hidden="true">+</span><div class="pk-wrap"><div class="pk-gift"><div class="g"></div><span class="bow"></span><span class="label">${s.img?`<img src="${s.img}" alt="">`:''}</span></div><span class="pk-cap">${esc(s.name)}<br>עטוף בנפרד</span></div>`).join('');
@@ -2130,42 +2313,43 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
   }
   function why(P){
     if(P.separate.length)return `הכול לא נכנס בשקית הגדולה, אז ${P.separate.map(s=>s.name).join(' ו')} ${P.separate.length>1?'יגיעו עטופים':'יגיע עטוף'} בנייר VENIA עם סרט זהב, צמוד ל${BCAT.packs[P.pack].name}.`;
-    if(P.pack==='bag'){const base=['שקית ממותגת','דף ברכה עם הלוגו שלכם',P.choc.name,'תבנית סיליקון לדונאטס'],add=P.counts.map(i=>i.name+(i.q>1?` ×${i.q}`:'')),all=[...base,...add];
-      return 'במארז: '+all.slice(0,-1).join(', ')+' ו'+all[all.length-1]+'.'}
+    if(P.pack==='bag'){const base=['שקית ממותגת','דף ברכה עם הלוגו שלכם',P.choc.name,...(P.baseItem?[P.baseItem.name]:[])],add=P.counts.filter(i=>!i.upg).map(i=>i.name+(i.q>1?` ×${i.q}`:'')),all=[...base,...add];
+      const L=all[all.length-1];return 'במארז: '+all.slice(0,-1).join(', ')+(/^\d/.test(L)?' ו־':' ו')+L+'.'}
     if(P.pack==='med')return 'המתנות כבר לא נכנסות בשקית הקטנה, אז המארז עבר לשקית בינונית.';
     return 'השקית הבינונית קטנה מדי, אז המארז עבר לשקית הגדולה.';
   }
   function render(){
     if(!B.h||!q('#buildPage'))return;
-    const h=B.h, P=bPlan(h.id,B.choc,B.q), items=bItems(h.id);
+    const h=B.h, P=bPlan(h.id,(bHol(h.id).choc.some(c=>c.id===B.choc)?B.choc:bHol(h.id).choc[0].id),B.q), items=bItems(h.id);
     if(!B.group||(B.group!==h.id&&B.group!=='general'))B.group=(BCAT.items[h.id]||[]).length?h.id:'general';
     q('#bldCrumb').textContent=`מארזי ${h.name}`;
     q('#bldEyebrow').textContent=h.when;
     q('#bldH').textContent=`מארזי ${h.name}`;
-    q('#bldChocs').innerHTML=BCAT.choc.map(c=>`<button type="button" class="bld-choc" data-bchoc="${c.id}" aria-pressed="${B.choc===c.id}"><img src="${c.img}" alt="" data-bczoom="${c.id}"><b>${c.name}</b><span>מארז ${c.from?'החל מ־':''}${nis(bBase(c))}</span></button>`).join('');
-    const catsWith=BCAT.cats.map(c=>{const its=items.filter(i=>i.cat===c.id);const sel=its.reduce((a,i)=>a+(B.q[i.id]||0),0);return {...c,n:its.length,sel,img:c.img||(its.find(i=>i.img)||{}).img||''}});
+    const HP=bHol(h.id);q('#bs2').textContent=HP.t1;q('#bs2sub').textContent=HP.sub1;q('#bldLeadMid').textContent=HP.lead;
+    if(!HP.choc.some(c=>c.id===B.choc))B.choc=HP.choc[0].id;
+    const UP=HP.upg;q('#bldUpgStep').hidden=!UP;
+    if(UP){q('#bsU').textContent=UP.title;q('#bsUsub').textContent=UP.sub;const curU=UP.opts.find(o=>B.q[o.id]>0);
+      q('#bldUpg').innerHTML=[{id:'',name:HP.base.name,price:0,todo:HP.base.todo},...UP.opts].map(o=>`<button type="button" class="bld-choc" data-bupg="${o.id}" aria-pressed="${(curU?curU.id:'')===o.id}"><span class="bc-ph" aria-hidden="true">✦</span><b>${esc(o.name)}</b><span>${o.price?'+'+nis(o.price):'כלול במארז'}</span>${o.todo?`<em class="todo">חסר: ${esc(o.todo)}</em>`:''}</button>`).join('')}
+    {let n=0;q('#buildPage').querySelectorAll('.bld-step').forEach(st=>{if(!st.hidden){const b=st.querySelector('.bld-n');if(b)b.textContent=++n}})}
+    q('#bldChocs').innerHTML=HP.choc.map(c=>`<button type="button" class="bld-choc" data-bchoc="${c.id}" aria-pressed="${B.choc===c.id}">${c.img?`<img src="${c.img}" alt="" data-bczoom="${c.id}">`:'<span class="bc-ph" aria-hidden="true">✦</span>'}<b>${c.name}</b><span>מארז ${c.from?'החל מ־':''}${nis(bBase(c))}</span>${c.todo?`<em class="todo">חסר: ${esc(c.todo)}</em>`:''}</button>`).join('');
+    const catsWith=BCAT.cats.filter(c=>!c.h||c.h.includes(h.id)).map(c=>{const its=items.filter(i=>i.cat===c.id);const sel=its.reduce((a,i)=>a+(B.q[i.id]||0),0);return {...c,n:its.length,sel,img:c.img||(its.find(i=>i.img)||{}).img||''}});
     if(!B.cat)B.cat='all';
-    const inCat=B.cat!=='all';
-    q('#bldTools').hidden=!inCat;
-    if(!inCat){
-      q('#bldCats').innerHTML='';q('#bldItems').classList.add('cat-list');
-      q('#bldItems').innerHTML=catsWith.map(c=>`<button type="button" class="bld-catrow${c.n?'':' empty'}${c.sel?' on':''}" data-bcat="${c.id}"><span class="cr-img">${c.img?`<img src="${c.img}" alt="">`:'<span class="bi-ph" aria-hidden="true">✦</span>'}</span><span class="cr-txt"><b>${esc(c.name)}</b><span>${c.n?`${c.n} ${c.n===1?'מוצר':'מוצרים'}`:'בקרוב'}${c.sel?` · נבחרו ${c.sel}`:''}</span></span><span class="cr-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></span></button>`).join('')
-      q('#bldItems').insertAdjacentHTML('beforeend',`<button type="button" class="bld-catrow cr-custom" data-custom><span class="cr-img"><svg viewBox="0 0 60 60" width="70" height="70" aria-hidden="true"><use href="#seal"/></svg></span><span class="cr-txt"><b>התאמה אישית</b><span>מארז לפי בקשה, בכל תקציב</span></span><span class="cr-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></span></button>`);
-    }else{
-      const cur=catsWith.find(c=>c.id===B.cat)||{name:''};
-      q('#bldItems').classList.remove('cat-list');
-      q('#bldCats').innerHTML=`<div class="bc-head"><button type="button" class="bc-backbtn" data-bcat="all" aria-label="חזרה לקטגוריות"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button><h3 class="bc-title">${esc(cur.name)}</h3></div>`;
-      const pr=(B.price||'all').split('-').map(Number);
-      let shown=items.filter(i=>i.cat===B.cat&&(!B.price||B.price==='all'||(i.price!=null&&i.price>pr[0]&&i.price<=pr[1])));
-      const so=B.sort||'pa';const pv=x=>x.price==null?1e9:x.price;shown=shown.slice().sort(so==='pd'?(a,b)=>(b.price==null?-1:b.price)-(a.price==null?-1:a.price):so==='nm'?(a,b)=>a.name.localeCompare(b.name,'he'):(a,b)=>pv(a)-pv(b));
-      q('#bldSort').value=so;q('#bldPrice').value=B.price||'all';q('#bldFiltDot').hidden=!(B.price&&B.price!=='all');
-      q('#bldItems').innerHTML=shown.length?shown.map(i=>{const n=B.q[i.id]||0;
+    // קטגוריות נפתחות במקום (אקורדיון): הקטגוריה הפתוחה מציגה את המוצרים מתחתיה, והשאר נשארות גלויות
+    const tools=q('#bldTools');const toolsHome=q('#bldItems').parentNode;toolsHome.insertBefore(tools,q('#bldItems'));tools.hidden=true;
+    q('#bldCats').innerHTML='';q('#bldItems').classList.add('cat-list');
+    const pr=(B.price||'all').split('-').map(Number),so=B.sort||'pa',pv=x=>x.price==null?1e9:x.price;
+    const itemCard=i=>{const n=B.q[i.id]||0;
         return `<div class="bld-item${n?' on':''}"><div class="bi-img"${i.img?` data-bzoom="${i.id}" role="button" tabindex="0" aria-label="הגדלת התמונה: ${esc(i.name)}"`:''}>${i.img?`<img src="${i.img}" alt="">`:'<span class="bi-ph" aria-hidden="true">✦</span>'}</div>
-        <b>${esc(i.name)}</b>
-        <div class="bi-row">${i.price==null?'<span class="bi-price soon">המחיר יעודכן בקרוב</span>':`<span class="bi-price">${i.from?'<small>החל מ־</small>':''}<span>${nis(i.price)}</span></span><span class="stp"><button type="button" data-bdec="${i.id}" aria-label="פחות ${esc(i.name)}">−</button><output>${n}</output><button type="button" data-binc="${i.id}" aria-label="עוד ${esc(i.name)}">+</button></span>`}</div></div>`}).join('')
-        :(B.price&&B.price!=='all'&&cur.n)?'<p class="bld-soon">אין מוצרים בטווח המחירים הזה. נסו טווח אחר.</p>':`<p class="bld-soon">המוצרים בקטגוריה הזו יתווספו בקרוב. רוצים משהו מסוים? <a href="https://wa.me/972535910605" target="_blank" rel="noopener">כתבו לנו בוואטסאפ</a></p>`
-      q('#bldItems').insertAdjacentHTML('beforeend',`<button type="button" class="bld-custom" data-custom><span class="bcu-seal"><svg viewBox="0 0 60 60" aria-hidden="true"><use href="#seal"/></svg></span><span class="bcu-txt"><b>להתאמה אישית בכל תקציב</b><span>מחפשים משהו אחר? נרכיב לכם מארז לפי בקשה</span></span><span class="bcu-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></span></button>`);
-    }
+        <b>${esc(i.name)}</b>${i.todo?`<em class="todo">חסר: ${esc(i.todo)}</em>`:''}
+        <div class="bi-row">${i.price==null?'<span class="bi-price soon">המחיר יעודכן בקרוב</span>':`<span class="bi-price">${i.from?'<small>החל מ־</small>':''}<span>${nis(i.price)}</span></span><span class="stp"><button type="button" data-bdec="${i.id}" aria-label="פחות ${esc(i.name)}">−</button><output>${n}</output><button type="button" data-binc="${i.id}" aria-label="עוד ${esc(i.name)}">+</button></span>`}</div></div>`};
+    const panel=c=>{let shown=items.filter(i=>i.cat===c.id&&(!B.price||B.price==='all'||(i.price!=null&&i.price>pr[0]&&i.price<=pr[1])));
+      shown=shown.slice().sort(so==='pd'?(a,b)=>(b.price==null?-1:b.price)-(a.price==null?-1:a.price):so==='nm'?(a,b)=>a.name.localeCompare(b.name,'he'):(a,b)=>pv(a)-pv(b));
+      const body=shown.length?`<div class="bld-items">${shown.map(itemCard).join('')}</div>`
+        :(B.price&&B.price!=='all'&&c.n)?'<p class="bld-soon">אין מוצרים בטווח המחירים הזה. נסו טווח אחר.</p>':`<p class="bld-soon">המוצרים בקטגוריה הזו יתווספו בקרוב. רוצים משהו מסוים? <a href="https://wa.me/972535910605" target="_blank" rel="noopener">כתבו לנו בוואטסאפ</a></p>`;
+      return `<div class="bld-acc" id="acc-${c.id}"><div class="bld-acc-tools"></div>${body}<button type="button" class="bld-acc-close" data-bcat="${c.id}">סגירת הקטגוריה</button></div>`};
+    q('#bldItems').innerHTML=catsWith.map(c=>{const open=B.cat===c.id;return `<button type="button" class="bld-catrow${c.n?'':' empty'}${c.sel?' on':''}${open?' open':''}" data-bcat="${c.id}" aria-expanded="${open}"><span class="cr-img">${c.img?`<img src="${c.img}" alt="">`:'<span class="bi-ph" aria-hidden="true">✦</span>'}</span><span class="cr-txt"><b>${esc(c.name)}</b><span>${c.n?`${c.n} ${c.n===1?'מוצר':'מוצרים'}`:'בקרוב'}${c.sel?` · נבחרו ${c.sel}`:''}</span></span><span class="cr-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></span></button>${open?panel(c):''}`}).join('');
+    q('#bldItems').insertAdjacentHTML('beforeend',`<button type="button" class="bld-catrow cr-custom" data-custom><span class="cr-img"><svg viewBox="0 0 60 60" width="70" height="70" aria-hidden="true"><use href="#seal"/></svg></span><span class="cr-txt"><b>התאמה אישית</b><span>מארז לפי בקשה, בכל תקציב</span></span><span class="cr-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></span></button>`);
+    {const at=q('#bldItems .bld-acc-tools');if(at){at.appendChild(tools);tools.hidden=false;q('#bldSort').value=so;q('#bldPrice').value=B.price||'all';q('#bldFiltDot').hidden=!(B.price&&B.price!=='all')}}
     q('#bldStage').innerHTML=stage(P);
     const pct=Math.min(100,Math.round(P.inPts*100/P.cap));
     q('#bldPack').textContent=P.pack==='bag'?'':BCAT.packs[P.pack].name+(P.separate.length?' + עטיפה נפרדת':'');
@@ -2174,7 +2358,7 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
     const dp=discPct(n),dAmt=Math.round(sub*dp/100),nextD=VOLUME_DISCOUNTS.find(d=>d.min>n);
     const dTiers=`<span class="dt-h">הנחות כמות:</span>`+VOLUME_DISCOUNTS.map(d=>`<span class="dt${dp===d.pct?' on':''}"><span>מ־${d.min} מארזים</span><b>${d.pct}% הנחה</b></span>`).join('');
     const pk=BCAT.packs[P.pack];
-    const lines=[[`בסיס: שקית, דף ברכה, תבנית סיליקון, ${P.choc.name}`,bBase(P.choc)],...(P.boxAdd?[[`מעבר ל${pk.name}`,P.boxAdd]]:[]),
+    const lines=[[`בסיס: ${bHol(h.id).baseLbl}, ${P.choc.name}`,bBase(P.choc)],...(P.boxAdd?[[`מעבר ל${pk.name}`,P.boxAdd]]:[]),
       ...P.counts.map(i=>[`${i.name}${i.q>1?' ×'+i.q:''}`,i.price*i.q]),...(P.separate.length?[[`עטיפה נפרדת ×${P.separate.length}`,P.separate.length*BCAT.wrap]]:[])];
     q('#bldSum').innerHTML=`<h2>סיכום המארז</h2>
       <div class="bs-lines">${lines.map(([t,v])=>`<div class="bs-line"><span>${esc(t)}</span><span>${nis(v)}</span></div>`).join('')}</div>
@@ -2198,7 +2382,7 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
       document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.hidden=true})}
     if(it.choc){lb.dataset.choc=it.choc;lb.dataset.id=''}else{lb.dataset.choc='';lb.dataset.id=it.id}zoomFill();lb.hidden=false}
   function zoomFill(){const lb=q('#bZoom');
-    if(lb.dataset.choc){const c=BCAT.choc.find(x=>x.id===lb.dataset.choc);if(!c)return;const on=B.choc===c.id;
+    if(lb.dataset.choc){const c=bHol(B.h.id).choc.find(x=>x.id===lb.dataset.choc);if(!c)return;const on=B.choc===c.id;
       lb.innerHTML=`<div class="bz-card"><button type="button" class="bz-x" aria-label="סגירה">×</button><img src="${c.img}" alt="${esc(c.name)}"><b>${esc(c.name)}</b>
       <div class="bz-row"><span class="bz-price"><small>מחיר המארז</small>${nis(bBase(c))}</span></div>
       ${on?`<button type="button" class="add bz-add bz-x2">✓ נבחר · חזרה</button>`:`<button type="button" class="add bz-add bz-pick">בחירה</button>`}</div>`;return}
@@ -2222,14 +2406,15 @@ setInterval(()=>{if(document.documentElement.classList.contains("a11y-still")||m
     else return;gcPrev()}
   document.addEventListener('input',e=>{if(e.target.closest('#buildPage'))gcRead(e)});
   document.addEventListener('change',e=>{if(e.target.closest('#buildPage')&&e.target.type!=='text'&&e.target.tagName!=='TEXTAREA')gcRead(e)});
-  window.bldOpen=function(h){if(!B.h||B.h.id!==h.id){B.h=h;B.q={};B.choc='p2';B.group=null;B.cat='all'}render()};
+  window.bldOpen=function(h){if(!B.h||B.h.id!==h.id){B.h=h;B.q={};B.choc=bHol(h.id).choc[0].id;B.group=null;B.cat='all'}render()};
   document.addEventListener('click',e=>{
     if(!e.target.closest('#buildPage'))return;
     const cz=e.target.closest('[data-bczoom]');if(cz){zoom({choc:cz.dataset.bczoom});return}
     const c=e.target.closest('[data-bchoc]');if(c){B.choc=c.dataset.bchoc;render();return}
+    const u=e.target.closest('[data-bupg]');if(u){const UP=bHol(B.h.id).upg;if(UP){UP.opts.forEach(o=>delete B.q[o.id]);if(u.dataset.bupg)B.q[u.dataset.bupg]=1}render();return}
     const g=e.target.closest('[data-bgrp]');if(g){B.group=g.dataset.bgrp;render();return}
     if(e.target.closest('[data-custom]')){const pp=q('#pop');if(pp){q('#popForm').hidden=false;q('#pDone').hidden=true;pp.hidden=false;q('#pName').focus()}return}
-    const bc=e.target.closest('[data-bcat]');if(bc){B.cat=bc.dataset.bcat;B.price='all';render();const st=q('#bs3');if(st)st.closest('.bld-step').scrollIntoView({behavior:'smooth',block:'start'});return}
+    const bc=e.target.closest('[data-bcat]');if(bc){const id=bc.dataset.bcat,closing=B.cat===id;B.cat=closing?'all':id;B.price='all';render();const row=q(`#bldItems .bld-catrow[data-bcat="${id}"]`);if(row){const hd=(q('.top')||q('header')||{offsetHeight:70}).offsetHeight||70;window.scrollTo({top:row.getBoundingClientRect().top+scrollY-hd-12,behavior:'smooth'})}return}
     const z=e.target.closest('[data-bzoom]');if(z){const it=bItems(B.h.id).find(x=>x.id===z.dataset.bzoom);if(it)zoom(it);return}
     const i=e.target.closest('[data-binc]');if(i){B.q[i.dataset.binc]=Math.min(9,(B.q[i.dataset.binc]||0)+1);render();return}
     const d=e.target.closest('[data-bdec]');if(d){B.q[d.dataset.bdec]=Math.max(0,(B.q[d.dataset.bdec]||0)-1);render();return}
